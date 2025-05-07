@@ -2,262 +2,128 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="icon" href="logo.png" type="image/png" />
-  <title>Free Tools Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Toolbox - All In One</title>
+  <link rel="icon" href="your-logo.png" type="image/png">
   <style>
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
-      padding: 0;
-      background: #1d1d1d;
-      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #121212;
+      color: #eee;
     }
     header {
-      background: #111;
-      color: #fff;
-      padding: 1rem;
-      text-align: center;
-      border-bottom: 2px solid #333;
+      position: sticky;
+      top: 0;
+      background-color: #1e1e1e;
+      z-index: 999;
     }
-    main {
-      padding: 20px;
+    nav {
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      font-size: 14px;
     }
-    .tool {
-      background: #2c2c2c;
-      border-radius: 8px;
-      padding: 20px;
-      margin-bottom: 30px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    input, button, textarea {
-      padding: 10px;
-      margin: 5px 0;
-      width: 100%;
-      max-width: 400px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      background: #333;
-      color: #fff;
-    }
-    canvas {
-      margin-top: 10px;
-      border: 1px solid #ccc;
-    }
-    .ads {
-      margin: 30px 0;
-      text-align: center;
-    }
-    img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 8px;
-    }
-    .download-btn {
-      margin-top: 10px;
-      display: inline-block;
-      padding: 10px 15px;
-      background: #28a745;
-      color: white;
+    nav a {
+      color: #aaa;
       text-decoration: none;
-      border-radius: 5px;
+      padding: 6px 12px;
+      transition: color 0.3s;
     }
-    .tool h2 {
-      color: #28a745;
+    nav a:hover {
+      color: #fff;
+    }
+    section {
+      padding: 40px 20px;
+      border-bottom: 1px solid #333;
+    }
+    h2 {
+      color: #90caf9;
+    }
+    .toolbox {
+      max-width: 900px;
+      margin: auto;
+    }
+    iframe {
+      width: 100%;
+      height: 500px;
+      border: none;
+      background: #222;
+    }
+    @media screen and (max-width: 768px) {
+      nav {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      section {
+        padding: 20px 10px;
+      }
     }
   </style>
-
-  <script data-cfasync="false" src="https://propu.sh/pfe/current/tag.min.js?z=7433906" async></script>
-  <script src="https://richinfo.co/richpartners/in-page/js/richads-ob.js?pubid=972046&siteid=362675" async></script>
 </head>
 <body>
-
   <header>
-    <h1>Free Tools Hub</h1>
-    <p>Use these tools forever, free and unlimited.</p>
+    <nav>
+      <a href="#pdf">PDF Tool</a>
+      <a href="#qr">QR Generator</a>
+      <a href="#thumbnail">YouTube Thumbnail</a>
+      <a href="#shortener">Link Shortener</a>
+      <a href="#bgremover">Background Remover</a>
+      <a href="#audioextract">Audio Extractor</a>
+      <a href="#videoconvert">Video Converter</a>
+    </nav>
   </header>
 
-  <main>
+  <div class="toolbox">
+    <section id="pdf">
+      <h2>PDF to JPG/PNG</h2>
+      <iframe src="https://tools.pdf24.org/en/pdf-to-image"></iframe>
+    </section>
 
-    <!-- Ads Placeholder -->
-    <div class="ads">
-      <p>Loading ads...</p>
-    </div>
+    <section id="qr">
+      <h2>QR Code Generator</h2>
+      <iframe src="https://www.qr-code-generator.com/" ></iframe>
+    </section>
 
-    <!-- Tool 1: PDF to PNG -->
-    <div class="tool">
-      <h2>📄 PDF to PNG (First Page)</h2>
-      <input type="file" id="pdfInput" accept="application/pdf" />
-      <canvas id="pdfCanvas"></canvas>
-    </div>
+    <section id="thumbnail">
+      <h2>YouTube Thumbnail Downloader</h2>
+      <iframe src="https://ytthumb.com/" ></iframe>
+    </section>
 
-    <!-- Tool 2: QR Code Generator -->
-    <div class="tool">
-      <h2>🔗 QR Code Generator</h2>
-      <input type="text" id="qrText" placeholder="Enter text or URL" />
-      <button onclick="generateQR()">Generate</button>
-      <div id="qrcode"></div>
-    </div>
+    <section id="shortener">
+      <h2>URL Shortener</h2>
+      <iframe src="https://shrtco.de/" ></iframe>
+    </section>
 
-    <!-- Tool 3: YouTube Thumbnail Downloader -->
-    <div class="tool">
-      <h2>🎥 YouTube Thumbnail Downloader</h2>
-      <input type="text" id="ytUrl" placeholder="Paste YouTube video URL" />
-      <button onclick="getThumbnail()">Get Thumbnail</button>
-      <div id="thumbResult"></div>
-    </div>
+    <section id="bgremover">
+      <h2>Background Remover</h2>
+      <iframe src="https://www.remove.bg/" ></iframe>
+    </section>
 
-    <!-- Tool 4: Link Shortener -->
-    <div class="tool">
-      <h2>🔗 Link Shortener</h2>
-      <input type="text" id="urlInput" placeholder="Enter URL" />
-      <button onclick="shortenLink()">Shorten Link</button>
-      <div id="shortenedLink"></div>
-    </div>
+    <section id="audioextract">
+      <h2>Audio Extractor (from Video)</h2>
+      <iframe src="https://www.audioextractor.net/" ></iframe>
+    </section>
 
-    <!-- Tool 5: Background Remover -->
-    <div class="tool">
-      <h2>🖼 Background Remover</h2>
-      <input type="file" id="imageInput" accept="image/*" />
-      <div id="backgroundResult"></div>
-    </div>
+    <section id="videoconvert">
+      <h2>Video Converter</h2>
+      <iframe src="https://convert-video-online.com/" ></iframe>
+    </section>
+  </div>
 
-  </main>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
-
+  <!-- Smooth scroll behavior -->
   <script>
-    // PDF to PNG
-    document.getElementById("pdfInput").addEventListener("change", function (e) {
-      const file = e.target.files[0];
-      if (!file) return;
-
-      const reader = new FileReader();
-      reader.onload = function () {
-        const typedarray = new Uint8Array(this.result);
-        pdfjsLib.getDocument(typedarray).promise.then(function (pdf) {
-          pdf.getPage(1).then(function (page) {
-            const scale = 1.5;
-            const viewport = page.getViewport({ scale });
-            const canvas = document.getElementById("pdfCanvas");
-            const context = canvas.getContext("2d");
-            canvas.height = viewport.height;
-            canvas.width = viewport.width;
-
-            const renderContext = {
-              canvasContext: context,
-              viewport: viewport,
-            };
-            page.render(renderContext);
-          });
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const id = this.getAttribute('href').substring(1);
+        const section = document.getElementById(id);
+        window.scrollTo({
+          top: section.offsetTop - 40,
+          behavior: 'smooth'
         });
-      };
-      reader.readAsArrayBuffer(file);
-    });
-
-    // QR Generator
-    function generateQR() {
-      const text = document.getElementById("qrText").value;
-      if (!text) return alert("Please enter text");
-
-      const container = document.getElementById("qrcode");
-      container.innerHTML = "";
-
-      const canvas = document.createElement("canvas");
-      QRCode.toCanvas(canvas, text, { width: 200 }, (err) => {
-        if (err) console.error(err);
-        else {
-          container.appendChild(canvas);
-          const link = document.createElement("a");
-          link.textContent = "Download QR Code";
-          link.className = "download-btn";
-          link.download = "qrcode.png";
-          link.href = canvas.toDataURL("image/png");
-          container.appendChild(link);
-        }
       });
-    }
-
-    // YouTube Thumbnail
-    function getThumbnail() {
-      const input = document.getElementById("ytUrl").value.trim();
-      let videoId = "";
-
-      if (input.includes("youtube.com")) {
-        videoId = input.split("v=")[1]?.split("&")[0];
-      } else if (input.includes("youtu.be")) {
-        videoId = input.split("youtu.be/")[1]?.split("?")[0];
-      }
-
-      if (!videoId || videoId.length !== 11) {
-        alert("Invalid YouTube URL");
-        return;
-      }
-
-      const imgUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
-
-      const result = document.getElementById("thumbResult");
-      result.innerHTML = `<img src="${imgUrl}" alt="Thumbnail"/><br>
-        <a href="${imgUrl}" class="download-btn" download="thumbnail.jpg">Download Thumbnail</a>`;
-    }
-
-    // Link Shortener
-    function shortenLink() {
-      const url = document.getElementById("urlInput").value.trim();
-      if (!url) {
-        alert("Please enter a URL");
-        return;
-      }
-
-      const apiKey = 'd6H7lfDZBGLzssOXazYsSvUZ8dH5188LO9hO17Qsqlo9Pu4IZrwx12cveYqM';
-      const apiUrl = `https://api.tinyurl.com/create?url=${encodeURIComponent(url)}`;
-
-      fetch(apiUrl, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${apiKey}`,
-        },
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.short_url) {
-          document.getElementById("shortenedLink").innerHTML = `
-            Shortened URL: <a href="${data.short_url}" target="_blank">${data.short_url}</a>
-          `;
-        } else {
-          alert("Failed to shorten the link");
-        }
-      })
-      .catch(error => {
-        alert("Error shortening the link");
-      });
-    }
-
-    // Background Remover
-    document.getElementById("imageInput").addEventListener("change", async function (e) {
-      const file = e.target.files[0];
-      if (!file) return;
-
-      const formData = new FormData();
-      formData.append('image', file);
-
-      const response = await fetch('https://api.remove.bg/v1.0/removebg', {
-        method: 'POST',
-        headers: {
-          'X-Api-Key': 'your-removebg-api-key-here'
-        },
-        body: formData,
-      });
-      const result = await response.json();
-
-      if (result && result.data && result.data.result_b64) {
-        document.getElementById("backgroundResult").innerHTML = `<img src="data:image/png;base64,${result.data.result_b64}" />`;
-      } else {
-        alert("Failed to remove background.");
-      }
     });
   </script>
-
 </body>
 </html>
