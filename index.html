@@ -2,216 +2,244 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Free Tools Hub</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    * {
-      box-sizing: border-box;
-    }
     body {
       margin: 0;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #121212;
-      color: #fff;
+      color: #eee;
     }
+
     header {
       background-color: #1f1f1f;
-      padding: 1rem 2rem;
+      padding: 10px;
       text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+      color: #00ffd0;
+    }
+
+    nav {
+      background: #181818;
+      padding: 5px 10px;
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
       position: sticky;
       top: 0;
       z-index: 1000;
     }
-    header h1 {
-      margin: 0;
-      font-size: 1.8rem;
-    }
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      margin-top: 0.5rem;
-      flex-wrap: wrap;
-    }
+
     nav button {
-      background: #333;
+      background: #282828;
+      color: #eee;
       border: none;
-      color: #fff;
-      padding: 0.5rem 1rem;
+      padding: 6px 12px;
+      border-radius: 4px;
       cursor: pointer;
-      border-radius: 5px;
-      transition: background 0.3s;
     }
+
     nav button:hover {
-      background: #555;
+      background: #00ffd0;
+      color: #121212;
     }
+
     main {
-      padding: 2rem;
-      max-width: 900px;
-      margin: auto;
+      padding: 20px;
     }
-    section {
+
+    .tool {
       background: #1e1e1e;
-      border-radius: 10px;
-      padding: 2rem;
-      margin-bottom: 3rem;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 40px;
+      box-shadow: 0 0 10px rgba(0, 255, 208, 0.1);
     }
+
     h2 {
-      margin-top: 0;
-      color: #00d1b2;
+      color: #00ffd0;
     }
-    input, button, textarea, canvas {
+
+    input, button, select, textarea {
       width: 100%;
-      max-width: 500px;
+      max-width: 400px;
       padding: 10px;
       margin: 10px 0;
+      border: 1px solid #333;
       border-radius: 5px;
-      border: none;
-      background: #2c2c2c;
-      color: white;
+      background: #222;
+      color: #eee;
     }
-    button {
-      background: #00d1b2;
-      color: #000;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.3s;
+
+    canvas, img {
+      margin-top: 10px;
+      max-width: 100%;
+      border-radius: 6px;
     }
-    button:hover {
-      background: #00bfa5;
-    }
+
     .download-btn {
       display: inline-block;
-      margin-top: 1rem;
-      background: #00d1b2;
-      color: black;
-      text-decoration: none;
-      padding: 0.5rem 1rem;
-      border-radius: 5px;
-    }
-    img {
-      max-width: 100%;
-      border-radius: 5px;
       margin-top: 10px;
+      background: #00ffd0;
+      color: #121212;
+      padding: 10px 15px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .ads {
+      margin: 30px 0;
+      text-align: center;
+      background: #2a2a2a;
+      padding: 20px;
+      border-radius: 8px;
+    }
+
+    @media (max-width: 600px) {
+      nav {
+        flex-direction: column;
+        align-items: center;
+      }
     }
   </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
 </head>
 <body>
   <header>
-    <h1>🛠️ Free Tools Hub</h1>
-    <nav>
-      <button onclick="scrollToTool('pdfTool')">PDF to Images</button>
-      <button onclick="scrollToTool('qrTool')">QR Generator</button>
-      <button onclick="scrollToTool('ytTool')">YT Thumbnail</button>
-      <button onclick="scrollToTool('textTool')">Text Tools</button>
-      <button onclick="scrollToTool('imgTool')">Image Compressor</button>
-    </nav>
+    <h1>📌 Free Tools Hub</h1>
   </header>
-
+  <nav>
+    <button onclick="scrollToTool('pdfTool')">PDF Tool</button>
+    <button onclick="scrollToTool('qrTool')">QR Code</button>
+    <button onclick="scrollToTool('ytTool')">Thumbnail</button>
+    <button onclick="scrollToTool('wordTool')">Word Counter</button>
+  </nav>
   <main>
-    <!-- PDF Tool -->
-    <section id="pdfTool">
+    <div class="ads">🔹 Ad Space 🔹</div>
+
+    <div id="pdfTool" class="tool">
       <h2>📄 PDF to Image (All Pages)</h2>
       <input type="file" id="pdfInput" accept="application/pdf" />
-      <div id="pdfContainer"></div>
-    </section>
+      <select id="imgFormat">
+        <option value="png">PNG</option>
+        <option value="jpeg">JPG</option>
+      </select>
+      <button onclick="convertPDF()">Convert PDF</button>
+      <div id="pdfImages"></div>
+    </div>
 
-    <!-- QR Generator -->
-    <section id="qrTool">
+    <div id="qrTool" class="tool">
       <h2>🔗 QR Code Generator</h2>
       <input type="text" id="qrText" placeholder="Enter text or URL" />
       <button onclick="generateQR()">Generate</button>
       <div id="qrcode"></div>
-    </section>
+    </div>
 
-    <!-- YouTube Thumbnail -->
-    <section id="ytTool">
+    <div id="ytTool" class="tool">
       <h2>🎥 YouTube Thumbnail Downloader</h2>
       <input type="text" id="ytUrl" placeholder="Paste YouTube video URL" />
       <button onclick="getThumbnail()">Get Thumbnail</button>
       <div id="thumbResult"></div>
-    </section>
+    </div>
 
-    <!-- Text Tools -->
-    <section id="textTool">
+    <div id="wordTool" class="tool">
       <h2>📝 Word Counter</h2>
-      <textarea id="textArea" rows="6" placeholder="Paste or type your content..."></textarea>
-      <button onclick="countWords()">Count</button>
-      <p id="wordCount"></p>
-    </section>
+      <textarea id="wordText" rows="5" placeholder="Type or paste text here..."></textarea>
+      <p>Word Count: <span id="wordCount">0</span></p>
+    </div>
 
-    <!-- Image Compressor (Just UI Placeholder) -->
-    <section id="imgTool">
-      <h2>📷 Image Compressor</h2>
-      <p>(Feature coming soon!)</p>
-    </section>
+    <div class="ads">🔹 Ad Space 🔹</div>
   </main>
-
-  <!-- LIBRARIES -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
 
   <script>
     function scrollToTool(id) {
-      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
-    // PDF to All Images
-    document.getElementById("pdfInput").addEventListener("change", function (e) {
-      const file = e.target.files[0];
-      const container = document.getElementById("pdfContainer");
-      container.innerHTML = "";
-      if (!file) return;
+    // PDF to Image
+    function convertPDF() {
+      const input = document.getElementById('pdfInput');
+      const format = document.getElementById('imgFormat').value;
+      const container = document.getElementById('pdfImages');
+      container.innerHTML = '';
+      const file = input.files[0];
+      if (!file) return alert("Please upload a PDF");
+
       const reader = new FileReader();
       reader.onload = function () {
-        const typedarray = new Uint8Array(this.result);
-        pdfjsLib.getDocument(typedarray).promise.then(function (pdf) {
-          for (let i = 1; i <= pdf.numPages; i++) {
-            pdf.getPage(i).then(function (page) {
-              const scale = 1.5;
+        const typedarray = new Uint8Array(reader.result);
+        pdfjsLib.getDocument(typedarray).promise.then(pdf => {
+          const zip = [];
+          const total = pdf.numPages;
+          let done = 0;
+
+          for (let i = 1; i <= total; i++) {
+            pdf.getPage(i).then(page => {
+              const scale = 2;
               const viewport = page.getViewport({ scale });
-              const canvas = document.createElement("canvas");
+              const canvas = document.createElement('canvas');
+              const context = canvas.getContext('2d');
               canvas.width = viewport.width;
               canvas.height = viewport.height;
-              const ctx = canvas.getContext("2d");
-              page.render({ canvasContext: ctx, viewport: viewport }).promise.then(() => {
-                container.appendChild(canvas);
-                const link = document.createElement("a");
-                link.textContent = `Download Page ${i}`;
-                link.className = "download-btn";
-                link.href = canvas.toDataURL("image/png");
-                link.download = `page-${i}.png`;
-                container.appendChild(link);
+              const renderContext = { canvasContext: context, viewport };
+
+              page.render(renderContext).promise.then(() => {
+                const link = document.createElement('a');
+                link.href = canvas.toDataURL(`image/${format}`);
+                link.download = `page-${i}.${format}`;
+                zip.push(link);
+
+                const img = new Image();
+                img.src = link.href;
+                container.appendChild(img);
+
+                done++;
+                if (done === total) {
+                  const dlAll = document.createElement('button');
+                  dlAll.textContent = "Download All";
+                  dlAll.className = "download-btn";
+                  dlAll.onclick = () => zip.forEach(link => link.click());
+                  container.appendChild(dlAll);
+                }
               });
             });
           }
         });
       };
       reader.readAsArrayBuffer(file);
-    });
+    }
 
-    // QR Code
+    // QR Code Generator
     function generateQR() {
       const text = document.getElementById("qrText").value;
-      if (!text) return alert("Enter text or URL");
+      if (!text) return alert("Please enter text");
       const container = document.getElementById("qrcode");
       container.innerHTML = "";
       const canvas = document.createElement("canvas");
-      QRCode.toCanvas(canvas, text, { width: 200 }, (err) => {
-        if (err) return console.error(err);
-        container.appendChild(canvas);
-        const link = document.createElement("a");
-        link.textContent = "Download QR Code";
-        link.className = "download-btn";
-        link.download = "qrcode.png";
-        link.href = canvas.toDataURL("image/png");
-        container.appendChild(link);
+      QRCode.toCanvas(canvas, text, { width: 200 }, err => {
+        if (err) console.error(err);
+        else {
+          container.appendChild(canvas);
+          const link = document.createElement("a");
+          link.textContent = "Download QR Code";
+          link.className = "download-btn";
+          link.download = "qrcode.png";
+          link.href = canvas.toDataURL("image/png");
+          container.appendChild(link);
+        }
       });
     }
 
-    // YouTube Thumbnail
+    // YouTube Thumbnail Downloader
     function getThumbnail() {
       const input = document.getElementById("ytUrl").value.trim();
       let videoId = "";
@@ -220,10 +248,7 @@
       } else if (input.includes("youtu.be")) {
         videoId = input.split("youtu.be/")[1]?.split("?")[0];
       }
-      if (!videoId || videoId.length !== 11) {
-        alert("Invalid YouTube URL");
-        return;
-      }
+      if (!videoId || videoId.length !== 11) return alert("Invalid YouTube URL");
       const imgUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
       const result = document.getElementById("thumbResult");
       result.innerHTML = `<img src="${imgUrl}" alt="Thumbnail"/><br>
@@ -231,11 +256,11 @@
     }
 
     // Word Counter
-    function countWords() {
-      const text = document.getElementById("textArea").value.trim();
-      const wordCount = text ? text.split(/\s+/).length : 0;
-      document.getElementById("wordCount").textContent = `Words: ${wordCount}`;
-    }
+    document.getElementById("wordText").addEventListener("input", () => {
+      const text = document.getElementById("wordText").value.trim();
+      const words = text.length ? text.split(/\s+/).length : 0;
+      document.getElementById("wordCount").textContent = words;
+    });
   </script>
 </body>
 </html>
