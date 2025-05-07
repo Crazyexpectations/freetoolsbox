@@ -45,7 +45,7 @@
       max-width: 900px;
       margin: auto;
     }
-    textarea, input[type="text"], input[type="url"] {
+    textarea, input[type="text"], input[type="url"], input[type="number"] {
       width: 100%;
       background: #1e1e1e;
       border: 1px solid #444;
@@ -56,7 +56,7 @@
       border-radius: 6px;
       margin-top: 10px;
     }
-    button {
+    button, a.download-btn {
       margin-top: 10px;
       padding: 10px 20px;
       background-color: #2196f3;
@@ -65,14 +65,21 @@
       border-radius: 4px;
       cursor: pointer;
       font-size: 15px;
+      text-decoration: none;
+      display: inline-block;
     }
-    button:hover {
+    button:hover, a.download-btn:hover {
       background-color: #1976d2;
     }
     img.preview {
       margin-top: 10px;
       max-width: 100%;
       border-radius: 6px;
+    }
+    canvas {
+      display: block;
+      margin-top: 10px;
+      max-width: 100%;
     }
     @media screen and (max-width: 768px) {
       section {
@@ -133,9 +140,9 @@
     </section>
 
     <section id="pdfToImg">
-      <h2>PDF to Image</h2>
+      <h2>PDF to Image Converter</h2>
       <input type="file" id="pdfInput" accept="application/pdf">
-      <p>Use an offline PDF.js library to show and export pages as images.</p>
+      <div id="pdfPreview"></div>
     </section>
 
     <section id="qrGenerator">
@@ -150,10 +157,11 @@
       <input type="text" id="ytUrl" placeholder="Enter YouTube video URL">
       <button onclick="getYTThumbnail()">Get Thumbnail</button>
       <img id="ytThumbPreview" class="preview" src="" alt="">
-      <a id="downloadThumb" download style="display:none; color:lightblue;">Download Thumbnail</a>
+      <a id="downloadThumb" class="download-btn" download style="display:none;">Download Thumbnail</a>
     </section>
   </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
   <script>
     function convertText() {
       const input = document.getElementById("textInput").value;
@@ -198,7 +206,7 @@
     function generateQR() {
       const val = document.getElementById("qrText").value;
       const url = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(val)}`;
-      document.getElementById("qrOutput").innerHTML = `<img src="${url}" class="preview"><br><a href="${url}" download="qr.png">Download QR</a>`;
+      document.getElementById("qrOutput").innerHTML = `<img src="${url}" class="preview"><br><a href="${url}" download="qr.png" class="download-btn">Download QR</a>`;
     }
 
     function getYTThumbnail() {
@@ -210,9 +218,40 @@
         document.getElementById("ytThumbPreview").src = thumb;
         const link = document.getElementById("downloadThumb");
         link.href = thumb;
-        link.style.display = 'inline';
+        link.style.display = 'inline-block';
       }
     }
+
+    document.getElementById("pdfInput").addEventListener("change", async function (e) {
+      const file = e.target.files[0];
+      if (file.type !== "application/pdf") return;
+
+      const fileReader = new FileReader();
+      fileReader.onload = async function () {
+        const typedarray = new Uint8Array(this.result);
+        const pdf = await pdfjsLib.getDocument({ data: typedarray }).promise;
+        const container = document.getElementById("pdfPreview");
+        container.innerHTML = '';
+
+        for (let i = 1; i <= pdf.numPages; i++) {
+          const page = await pdf.getPage(i);
+          const viewport = page.getViewport({ scale: 1.5 });
+          const canvas = document.createElement("canvas");
+          const context = canvas.getContext("2d");
+          canvas.height = viewport.height;
+          canvas.width = viewport.width;
+          await page.render({ canvasContext: context, viewport: viewport }).promise;
+          container.appendChild(canvas);
+          const a = document.createElement("a");
+          a.textContent = `Download Page ${i}`;
+          a.className = 'download-btn';
+          a.href = canvas.toDataURL("image/png");
+          a.download = `page${i}.png`;
+          container.appendChild(a);
+        }
+      };
+      fileReader.readAsArrayBuffer(file);
+    });
 
     document.querySelectorAll('nav a').forEach(link => {
       link.addEventListener('click', function(e) {
