@@ -3,127 +3,223 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Toolbox - All In One</title>
-  <link rel="icon" href="your-logo.png" type="image/png">
+  <title>All-in-One Toolbox</title>
+  <link rel="icon" type="image/png" href="logo.png" />
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
+      font-family: Arial, sans-serif;
       background-color: #121212;
-      color: #eee;
-    }
-    header {
-      position: sticky;
-      top: 0;
-      background-color: #1e1e1e;
-      z-index: 999;
-    }
-    nav {
-      display: flex;
-      justify-content: space-around;
-      padding: 10px 0;
-      font-size: 14px;
-    }
-    nav a {
-      color: #aaa;
-      text-decoration: none;
-      padding: 6px 12px;
-      transition: color 0.3s;
-    }
-    nav a:hover {
       color: #fff;
     }
+    nav {
+      background-color: #1e1e1e;
+      padding: 10px 20px;
+      display: flex;
+      overflow-x: auto;
+      white-space: nowrap;
+      gap: 15px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      transition: background-color 0.2s ease;
+    }
+    nav a:hover {
+      background-color: #333;
+    }
     section {
-      padding: 40px 20px;
+      padding: 20px;
       border-bottom: 1px solid #333;
     }
     h2 {
-      color: #90caf9;
+      color: #00ffc3;
     }
-    .toolbox {
-      max-width: 900px;
-      margin: auto;
-    }
-    iframe {
+    input, select, button, textarea {
+      margin: 10px 0;
+      padding: 10px;
       width: 100%;
-      height: 500px;
       border: none;
-      background: #222;
+      border-radius: 5px;
     }
-    @media screen and (max-width: 768px) {
+    .ad {
+      margin: 30px auto;
+      width: 100%;
+      text-align: center;
+      background: #222;
+      padding: 20px;
+      color: #ccc;
+    }
+    iframe.ad-frame {
+      width: 300px;
+      height: 250px;
+      border: none;
+    }
+    @media (max-width: 600px) {
       nav {
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-      section {
-        padding: 20px 10px;
+        flex-wrap: nowrap;
+        overflow-x: scroll;
       }
     }
   </style>
 </head>
 <body>
-  <header>
-    <nav>
-      <a href="#pdf">PDF Tool</a>
-      <a href="#qr">QR Generator</a>
-      <a href="#thumbnail">YouTube Thumbnail</a>
-      <a href="#shortener">Link Shortener</a>
-      <a href="#bgremover">Background Remover</a>
-      <a href="#audioextract">Audio Extractor</a>
-      <a href="#videoconvert">Video Converter</a>
-    </nav>
-  </header>
+  <nav>
+    <a href="#pdf">PDF to Image</a>
+    <a href="#qr">QR Code</a>
+    <a href="#thumb">YT Thumbnail</a>
+    <a href="#short">Link Shortener</a>
+    <a href="#bg">Background Remover</a>
+    <a href="#audio">Audio Extractor</a>
+    <a href="#convert">Video Converter</a>
+  </nav>
 
-  <div class="toolbox">
-    <section id="pdf">
-      <h2>PDF to JPG/PNG</h2>
-      <iframe src="https://tools.pdf24.org/en/pdf-to-image"></iframe>
-    </section>
+  <section id="pdf">
+    <h2>PDF to Image</h2>
+    <input type="file" id="pdfInput" accept="application/pdf" />
+    <select id="imgFormat">
+      <option value="png">PNG</option>
+      <option value="jpeg">JPEG</option>
+    </select>
+    <button onclick="convertPDF()">Convert</button>
+    <div id="pdfResult"></div>
+  </section>
 
-    <section id="qr">
-      <h2>QR Code Generator</h2>
-      <iframe src="https://www.qr-code-generator.com/" ></iframe>
-    </section>
+  <section id="qr">
+    <h2>QR Code Generator</h2>
+    <input type="text" id="qrText" placeholder="Enter text or URL" />
+    <button onclick="generateQR()">Generate</button>
+    <div id="qrResult"></div>
+  </section>
 
-    <section id="thumbnail">
-      <h2>YouTube Thumbnail Downloader</h2>
-      <iframe src="https://ytthumb.com/" ></iframe>
-    </section>
+  <section id="thumb">
+    <h2>YouTube Thumbnail Downloader</h2>
+    <input type="text" id="ytURL" placeholder="Enter YouTube Video URL" />
+    <button onclick="getThumbnail()">Get Thumbnail</button>
+    <div id="thumbResult"></div>
+  </section>
 
-    <section id="shortener">
-      <h2>URL Shortener</h2>
-      <iframe src="https://shrtco.de/" ></iframe>
-    </section>
-
-    <section id="bgremover">
-      <h2>Background Remover</h2>
-      <iframe src="https://www.remove.bg/" ></iframe>
-    </section>
-
-    <section id="audioextract">
-      <h2>Audio Extractor (from Video)</h2>
-      <iframe src="https://www.audioextractor.net/" ></iframe>
-    </section>
-
-    <section id="videoconvert">
-      <h2>Video Converter</h2>
-      <iframe src="https://convert-video-online.com/" ></iframe>
-    </section>
+  <div class="ad">
+    <p>Your Ad Here</p>
+    <iframe class="ad-frame" src="https://youradprovider.com/adunit"></iframe>
   </div>
 
-  <!-- Smooth scroll behavior -->
+  <section id="short">
+    <h2>Link Shortener</h2>
+    <input type="text" id="longURL" placeholder="Enter long URL" />
+    <button onclick="shortenURL()">Shorten</button>
+    <div id="shortResult"></div>
+  </section>
+
+  <section id="bg">
+    <h2>Background Remover</h2>
+    <input type="file" id="bgImage" accept="image/*" />
+    <button onclick="removeBG()">Remove Background</button>
+    <div id="bgResult"></div>
+  </section>
+
+  <section id="audio">
+    <h2>Extract Audio from Video</h2>
+    <input type="file" id="videoFile" accept="video/*" />
+    <button onclick="extractAudio()">Extract</button>
+    <div id="audioResult"></div>
+  </section>
+
+  <section id="convert">
+    <h2>Video Converter</h2>
+    <input type="file" id="vidFile" accept="video/*" />
+    <select id="targetFormat">
+      <option value="mp4">MP4</option>
+      <option value="mp3">MP3</option>
+      <option value="avi">AVI</option>
+    </select>
+    <button onclick="convertVideo()">Convert</button>
+    <div id="convertResult"></div>
+  </section>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <script>
-    document.querySelectorAll('nav a').forEach(link => {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        const id = this.getAttribute('href').substring(1);
-        const section = document.getElementById(id);
-        window.scrollTo({
-          top: section.offsetTop - 40,
-          behavior: 'smooth'
+    function convertPDF() {
+      const file = document.getElementById("pdfInput").files[0];
+      const format = document.getElementById("imgFormat").value;
+      const reader = new FileReader();
+      reader.onload = function() {
+        pdfjsLib.getDocument(reader.result).promise.then(pdf => {
+          for (let i = 1; i <= pdf.numPages; i++) {
+            pdf.getPage(i).then(page => {
+              const viewport = page.getViewport({ scale: 2 });
+              const canvas = document.createElement("canvas");
+              const context = canvas.getContext("2d");
+              canvas.height = viewport.height;
+              canvas.width = viewport.width;
+              page.render({ canvasContext: context, viewport: viewport }).promise.then(() => {
+                canvas.toBlob(blob => {
+                  const link = document.createElement("a");
+                  link.href = URL.createObjectURL(blob);
+                  link.download = `page${i}.${format}`;
+                  link.click();
+                }, `image/${format}`);
+              });
+            });
+          }
         });
+      };
+      reader.readAsArrayBuffer(file);
+    }
+
+    function generateQR() {
+      const text = document.getElementById("qrText").value;
+      document.getElementById("qrResult").innerHTML = "";
+      new QRCode(document.getElementById("qrResult"), text);
+    }
+
+    function getThumbnail() {
+      const url = document.getElementById("ytURL").value;
+      const videoID = url.split("v=")[1]?.split("&")[0];
+      if (videoID) {
+        document.getElementById("thumbResult").innerHTML = `<img src='https://img.youtube.com/vi/${videoID}/maxresdefault.jpg' style='max-width:100%'/>`;
+      }
+    }
+
+    async function shortenURL() {
+      const longURL = document.getElementById("longURL").value;
+      const res = await fetch(`https://api.tinyurl.com/create?api_token=YOUR_API_KEY`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url: longURL })
       });
-    });
+      const data = await res.json();
+      document.getElementById("shortResult").textContent = data.data?.tiny_url || "Error shortening link";
+    }
+
+    async function removeBG() {
+      const file = document.getElementById("bgImage").files[0];
+      const formData = new FormData();
+      formData.append("image_file", file);
+      formData.append("size", "auto");
+      const res = await fetch("https://api.remove.bg/v1.0/removebg", {
+        method: "POST",
+        headers: { "X-Api-Key": "YOUR_API_KEY" },
+        body: formData
+      });
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      document.getElementById("bgResult").innerHTML = `<img src='${url}' style='max-width:100%' />`;
+    }
+
+    async function extractAudio() {
+      alert("Audio extraction would require FFmpeg.wasm or API like CloudConvert. Coming soon.");
+    }
+
+    async function convertVideo() {
+      alert("Video conversion using CloudConvert API or FFmpeg.wasm not implemented in demo.");
+    }
   </script>
 </body>
 </html>
