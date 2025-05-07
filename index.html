@@ -99,6 +99,7 @@
       <a href="#pdfToImg">PDF to Image</a>
       <a href="#qrGenerator">QR Generator</a>
       <a href="#ytThumb">YT Thumbnail</a>
+      <a href="#jsonFormatter">JSON Formatter</a>
     </nav>
   </header>
 
@@ -158,6 +159,13 @@
       <button onclick="getYTThumbnail()">Get Thumbnail</button>
       <img id="ytThumbPreview" class="preview" src="" alt="">
       <a id="downloadThumb" class="download-btn" download style="display:none;">Download Thumbnail</a>
+    </section>
+
+    <section id="jsonFormatter">
+      <h2>JSON Formatter</h2>
+      <textarea id="jsonInput" placeholder="Paste your JSON here..."></textarea>
+      <button onclick="formatJSON()">Format JSON</button>
+      <textarea id="jsonOutput" readonly placeholder="Formatted JSON..."></textarea>
     </section>
   </div>
 
@@ -219,6 +227,16 @@
         const link = document.getElementById("downloadThumb");
         link.href = thumb;
         link.style.display = 'inline-block';
+      }
+    }
+
+    function formatJSON() {
+      const input = document.getElementById("jsonInput").value;
+      try {
+        const obj = JSON.parse(input);
+        document.getElementById("jsonOutput").value = JSON.stringify(obj, null, 2);
+      } catch (e) {
+        document.getElementById("jsonOutput").value = "Invalid JSON!";
       }
     }
 
