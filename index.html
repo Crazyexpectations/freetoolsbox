@@ -20,7 +20,8 @@
     }
     nav {
       display: flex;
-      justify-content: space-around;
+      flex-wrap: wrap;
+      justify-content: center;
       padding: 10px 0;
       font-size: 14px;
     }
@@ -44,9 +45,8 @@
       max-width: 900px;
       margin: auto;
     }
-    textarea {
+    textarea, input[type="text"], input[type="url"] {
       width: 100%;
-      height: 120px;
       background: #1e1e1e;
       border: 1px solid #444;
       color: #eee;
@@ -54,6 +54,7 @@
       font-size: 16px;
       resize: vertical;
       border-radius: 6px;
+      margin-top: 10px;
     }
     button {
       margin-top: 10px;
@@ -68,11 +69,12 @@
     button:hover {
       background-color: #1976d2;
     }
+    img.preview {
+      margin-top: 10px;
+      max-width: 100%;
+      border-radius: 6px;
+    }
     @media screen and (max-width: 768px) {
-      nav {
-        flex-wrap: wrap;
-        justify-content: center;
-      }
       section {
         padding: 20px 10px;
       }
@@ -83,19 +85,73 @@
   <header>
     <nav>
       <a href="#textTool">Text Converter</a>
-      <!-- Add links for more offline tools -->
+      <a href="#unitConverter">Unit Converter</a>
+      <a href="#base64Tool">Base64 Tool</a>
+      <a href="#imageBase64">Image to Base64</a>
+      <a href="#textDiff">Text Diff Checker</a>
+      <a href="#pdfToImg">PDF to Image</a>
+      <a href="#qrGenerator">QR Generator</a>
+      <a href="#ytThumb">YT Thumbnail</a>
     </nav>
   </header>
 
   <div class="toolbox">
     <section id="textTool">
-      <h2>Text to Uppercase Converter (Offline)</h2>
+      <h2>Text to Uppercase Converter</h2>
       <textarea id="textInput" placeholder="Enter your text here..."></textarea>
       <button onclick="convertText()">Convert to UPPERCASE</button>
       <textarea id="textOutput" placeholder="Result..." readonly></textarea>
     </section>
 
-    <!-- Add more offline sections/tools below -->
+    <section id="unitConverter">
+      <h2>Unit Converter</h2>
+      <input type="number" id="unitInput" placeholder="Enter value in meters">
+      <button onclick="convertUnits()">Convert to feet</button>
+      <textarea id="unitOutput" readonly></textarea>
+    </section>
+
+    <section id="base64Tool">
+      <h2>Base64 Encoder/Decoder</h2>
+      <textarea id="b64input" placeholder="Enter text..."></textarea>
+      <button onclick="encodeB64()">Encode</button>
+      <button onclick="decodeB64()">Decode</button>
+      <textarea id="b64output" readonly></textarea>
+    </section>
+
+    <section id="imageBase64">
+      <h2>Image to Base64</h2>
+      <input type="file" accept="image/*" onchange="convertImageToBase64(event)">
+      <textarea id="imgB64Output" readonly></textarea>
+    </section>
+
+    <section id="textDiff">
+      <h2>Text Diff Checker</h2>
+      <textarea id="diff1" placeholder="Original text..."></textarea>
+      <textarea id="diff2" placeholder="Changed text..."></textarea>
+      <button onclick="checkDiff()">Compare</button>
+      <textarea id="diffOutput" readonly></textarea>
+    </section>
+
+    <section id="pdfToImg">
+      <h2>PDF to Image</h2>
+      <input type="file" id="pdfInput" accept="application/pdf">
+      <p>Use an offline PDF.js library to show and export pages as images.</p>
+    </section>
+
+    <section id="qrGenerator">
+      <h2>QR Code Generator</h2>
+      <input type="text" id="qrText" placeholder="Enter text or URL">
+      <button onclick="generateQR()">Generate</button>
+      <div id="qrOutput"></div>
+    </section>
+
+    <section id="ytThumb">
+      <h2>YouTube Thumbnail Downloader</h2>
+      <input type="text" id="ytUrl" placeholder="Enter YouTube video URL">
+      <button onclick="getYTThumbnail()">Get Thumbnail</button>
+      <img id="ytThumbPreview" class="preview" src="" alt="">
+      <a id="downloadThumb" download style="display:none; color:lightblue;">Download Thumbnail</a>
+    </section>
   </div>
 
   <script>
@@ -104,16 +160,66 @@
       document.getElementById("textOutput").value = input.toUpperCase();
     }
 
-    // Smooth scroll
+    function convertUnits() {
+      const val = parseFloat(document.getElementById("unitInput").value);
+      document.getElementById("unitOutput").value = `${val} meters = ${(val * 3.28084).toFixed(2)} feet`;
+    }
+
+    function encodeB64() {
+      const txt = document.getElementById("b64input").value;
+      document.getElementById("b64output").value = btoa(txt);
+    }
+
+    function decodeB64() {
+      const txt = document.getElementById("b64input").value;
+      try {
+        document.getElementById("b64output").value = atob(txt);
+      } catch (e) {
+        document.getElementById("b64output").value = "Invalid Base64!";
+      }
+    }
+
+    function convertImageToBase64(event) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        document.getElementById("imgB64Output").value = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function checkDiff() {
+      const a = document.getElementById("diff1").value.split('\n');
+      const b = document.getElementById("diff2").value.split('\n');
+      const result = a.map((line, i) => line === b[i] ? line : `[-] ${line}\n[+] ${b[i]}`).join('\n');
+      document.getElementById("diffOutput").value = result;
+    }
+
+    function generateQR() {
+      const val = document.getElementById("qrText").value;
+      const url = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(val)}`;
+      document.getElementById("qrOutput").innerHTML = `<img src="${url}" class="preview"><br><a href="${url}" download="qr.png">Download QR</a>`;
+    }
+
+    function getYTThumbnail() {
+      const url = document.getElementById("ytUrl").value;
+      const match = url.match(/(?:v=|\.be\/)([a-zA-Z0-9_-]{11})/);
+      if (match) {
+        const id = match[1];
+        const thumb = `https://img.youtube.com/vi/${id}/maxresdefault.jpg`;
+        document.getElementById("ytThumbPreview").src = thumb;
+        const link = document.getElementById("downloadThumb");
+        link.href = thumb;
+        link.style.display = 'inline';
+      }
+    }
+
     document.querySelectorAll('nav a').forEach(link => {
       link.addEventListener('click', function(e) {
         e.preventDefault();
         const id = this.getAttribute('href').substring(1);
         const section = document.getElementById(id);
-        window.scrollTo({
-          top: section.offsetTop - 40,
-          behavior: 'smooth'
-        });
+        window.scrollTo({ top: section.offsetTop - 40, behavior: 'smooth' });
       });
     });
   </script>
