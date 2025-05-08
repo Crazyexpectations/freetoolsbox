@@ -104,7 +104,7 @@
     </nav>
   </header>
 
-  <div id="rich_ads_container"></div>
+  <div id="rich_ads_container" style="width:100%; text-align:center; margin-top:20px;"></div>
   <div class="toolbox">
     <section id="textTool">
       <h2>Text to Uppercase Converter</h2>
@@ -272,6 +272,12 @@
       };
       fileReader.readAsArrayBuffer(file);
     });
+
+    window.onload = function () {
+      if (typeof richads_init === 'function') {
+        richads_init(); // Might trigger ad injection if needed
+      }
+    };
 
     document.querySelectorAll('nav a').forEach(link => {
       link.addEventListener('click', function(e) {
