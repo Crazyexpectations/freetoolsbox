@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Softwork Solutions</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="script.js"></script>
+  <link href="https://unpkg.com/lucide@latest/dist/lucide.min.js" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="cursor-ghost">
+  <div class="ghost-body">
+    <div class="face">
+      <div class="eyes">
+        <div class="eye left"></div>
+        <div class="eye right"></div>
+      </div>
+      <div class="mouth"></div>
+    </div>
+    <div class="wavy-bottom">
+      <div></div><div></div><div></div>
+    </div>
+  </div>
+</div>
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <img src="logo.png" alt="Softwork Logo">
+        <span>Softwork Solutions</span>
+      </div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <section class="hero">
+    <canvas id="network-bg"></canvas>
+    <div class="hero-inner">
+      <h1>Powering Your Digital Vision</h1>
+      <p>Custom Software • IT Infrastructure • Digital Transformation</p>
+      <div class="cta-buttons">
+        <a href="services.html" class="btn primary">Explore Services</a>
+        <a href="#quote" class="btn secondary">Get a Quote</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="services" id="services">
+    <div class="section-header">
+      <h2>Our Services</h2>
+    </div>
+    <div class="service-grid">
+      <div class="service-card">
+        <i data-lucide="code"></i>
+        <h3>Software Development</h3>
+        <p>Custom applications crafted for scalability and performance.</p>
+      </div>
+      <div class="service-card">
+        <i data-lucide="server"></i>
+        <h3>IT Infrastructure</h3>
+        <p>Reliable, secure, and future-ready IT environments.</p>
+      </div>
+      <div class="service-card">
+        <i data-lucide="megaphone"></i>
+        <h3>Digital Marketing</h3>
+        <p>Boost visibility with ROI-focused digital strategies.</p>
+      </div>
+      <div class="service-card">
+        <i data-lucide="lightbulb"></i>
+        <h3>Consulting</h3>
+        <p>Expert guidance to shape your tech strategy.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="why-choose-us">
+    <div class="container">
+      <h2>Why Choose Us</h2>
+      <ul>
+        <li><i data-lucide="check-circle"></i> 24/7 Support</li>
+        <li><i data-lucide="check-circle"></i> Industry Expertise</li>
+        <li><i data-lucide="check-circle"></i> Custom Solutions</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="testimonials">
+    <div class="container">
+      <h2>What Our Clients Say</h2>
+      <div class="testimonial-slider">
+        <div class="testimonial-card">"Reliable partner for our entire IT needs." – Client A</div>
+        <div class="testimonial-card">"Highly recommend their digital transformation services." – Client B</div>
+        <div class="testimonial-card">"We scaled 3x in 6 months thanks to Softwork." – Client C</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="cta-inner">
+      <h2>Let’s Build Something Great Together</h2>
+      <a href="contact.html" class="btn primary">Schedule a Call</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <img src="logo.png" alt="Softwork">
+          <p>Softwork Solutions – Powering Digital Vision</p>
+        </div>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="services.html">Services</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="socials">
+          <a href="#">LinkedIn</a>
+          <a href="#">Twitter</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Softwork Solutions. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>lucide.createIcons();</script>
+</body>
+</html>
