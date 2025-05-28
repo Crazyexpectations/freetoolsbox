@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us – Softwork Solutions</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="contact.css" />
+  <script defer src="script.js"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <canvas id="network-bg"></canvas>
+  <div class="cursor-ghost">
+  <div class="ghost-body">
+    <div class="face">
+      <div class="eyes">
+        <div class="eye left"></div>
+        <div class="eye right"></div>
+      </div>
+      <div class="mouth"></div>
+    </div>
+    <div class="hands">
+      <div class="hand left-hand"></div>
+      <div class="hand right-hand"></div>
+    </div>
+    <div class="wavy-bottom">
+      <div></div><div></div><div></div>
+    </div>
+    <div class="speech-bubble">Hi!</div>
+  </div>
+</div>
+
+  <!-- 🌐 NAVIGATION -->
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <img src="logo.png" alt="Softwork Logo">
+        <span>Softwork Solutions</span>
+      </div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html" class="active">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 🌟 HERO HEADER -->
+  <section class="hero">
+    <div class="hero-inner">
+      <h1>Contact Us</h1>
+      <p>We’d love to hear from you – whether you have a question, want a quote, or just want to say hello.</p>
+    </div>
+  </section>
+
+  <!-- 📨 CONTACT SECTION -->
+  <section class="contact-section">
+    <div class="contact-grid">
+      <form class="contact-form">
+        <h2>Send a Message</h2>
+        <div class="form-group">
+          <input type="text" placeholder="Your Name" required />
+          <input type="email" placeholder="Your Email" required />
+        </div>
+        <div class="form-group">
+          <input type="tel" placeholder="Your Phone (optional)" />
+        </div>
+        <textarea placeholder="Your Message..." required></textarea>
+        <button type="submit" class="btn primary">Send Message</button>
+      </form>
+
+      <div class="contact-info">
+        <h2>Connect With Us</h2>
+        <div class="info-card">
+          <i data-lucide="map-pin"></i>
+          <div><strong>India Office</strong><br />Mumbai, Maharashtra</div>
+        </div>
+        <div class="info-card">
+          <i data-lucide="map-pin"></i>
+          <div><strong>Dubai Office</strong><br />Business Bay, Dubai</div>
+        </div>
+        <div class="info-card">
+          <i data-lucide="mail"></i>
+          <div>hello@softworksolutions.com</div>
+        </div>
+        <div class="info-card">
+          <i data-lucide="phone"></i>
+          <div>+91 9876543210</div>
+        </div>
+        <div class="info-card">
+          <i data-lucide="linkedin"></i>
+          <div><a href="#">LinkedIn Profile</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 🌍 GOOGLE MAP -->
+  <section class="map-wrap">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d241317.11609842335!2d72.74110089792416!3d19.08219783947852!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b63de5db4c29%3A0x37632c27b8b78d19!2sMumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1716921900000"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+    ></iframe>
+  </section>
+
+  <!-- 🦶 FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <img src="logo.png" alt="Softwork">
+          <p>Softwork Solutions – Powering Digital Vision</p>
+        </div>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="services.html">Services</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="socials">
+          <a href="#">LinkedIn</a>
+          <a href="#">Twitter</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Softwork Solutions. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>
