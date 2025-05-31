@@ -515,6 +515,35 @@ body.dark #theme-toggle {
   box-shadow: 0 0 20px rgba(0,0,0,0.05);
 }
 
+.contact-form p,
+.contact-info p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #666;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: #aaa;
+}
+
+.contact-form input,
+.contact-form textarea {
+  background: #fefefe;
+  border: 1px solid #ddd;
+  font-family: 'Inter', sans-serif;
+}
+
+.contact-info .info-card {
+  padding: 0.6rem 0;
+  border-bottom: 1px dashed rgba(0,0,0,0.1);
+}
+
+.contact-info .info-card:last-child {
+  border-bottom: none;
+}
+
+
 .contact-info h2 {
   font-size: 1.7rem;
   margin-bottom: 1.5rem;
