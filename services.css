@@ -510,6 +510,89 @@ body.dark #theme-toggle {
   font-size: 1.1rem;
 }
 
+/* --- Onboarding Form Styles --- */
+.onboarding-form-section {
+  padding: 4rem 1rem;
+  background: #fff;
+  color: #000;
+}
+
+.onboarding-form-section h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.form-intro {
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  color: #444;
+}
+
+.onboarding-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.onboarding-form fieldset {
+  border: 1px solid #ddd;
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+
+.onboarding-form legend {
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #005f99;
+  font-size: 1.1rem;
+}
+
+.onboarding-form label {
+  display: block;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  color: #222;
+}
+
+.onboarding-form input,
+.onboarding-form textarea,
+.onboarding-form select {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.3rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  background-color: #fff;
+  color: #000;
+}
+
+.onboarding-form input[type="checkbox"],
+.onboarding-form input[type="radio"] {
+  width: auto;
+  margin-right: 0.5rem;
+}
+
+.onboarding-form textarea {
+  resize: vertical;
+}
+
+.onboarding-form button {
+  align-self: flex-start;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: #00bcd4;
+  border: none;
+  border-radius: 8px;
+  color: #000;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.onboarding-form button:hover {
+  background-color: #00acc1;
+}
 
 /* CTA Section */
 .cta {
@@ -647,6 +730,47 @@ body.dark .feature-list li i {
 body.dark .hover-overlay {
   background: rgba(0, 188, 212, 0.95);
   color: #ffffff;
+}
+
+/* --- Dark Mode for Form --- */
+body.dark .onboarding-form-section {
+  background-color: #121212;
+  color: #eee;
+}
+
+body.dark .onboarding-form input,
+body.dark .onboarding-form textarea,
+body.dark .onboarding-form select {
+  background-color: #1e1e1e;
+  color: #fff;
+  border: 1px solid #444;
+}
+
+body.dark .onboarding-form legend {
+  color: #00bcd4;
+}
+
+body.dark .onboarding-form label {
+  color: #ccc;
+}
+
+body.dark .onboarding-form button {
+  background-color: #00bcd4;
+  color: #000;
+}
+
+body.dark .onboarding-form button:hover {
+  background-color: #00acc1;
+}
+
+@media (max-width: 768px) {
+  .onboarding-form-section {
+    padding: 2rem 1rem;
+  }
+
+  .onboarding-form fieldset {
+    padding: 1rem;
+  }
 }
 
 /* DARK MODE — CTA SECTION */
