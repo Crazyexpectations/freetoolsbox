@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Our Services | Softwork Solutions</title>
   <link rel="stylesheet" href="services.css" />
-  <link rel="icon" href="logo3.png" type="image/png" />
   <script defer src="script.js"></script>
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <canvas id="network-bg"></canvas>
-  <div class="cursor-ghost">
+  <div class="cursor-ghost" id="ghost">
   <div class="ghost-body">
     <div class="face">
       <div class="eyes">
@@ -28,28 +28,41 @@
     <div class="wavy-bottom">
       <div></div><div></div><div></div>
     </div>
-    <div class="speech-bubble">Hi!</div>
+    <div class="speech-bubble">Hi there!</div>
   </div>
 </div>
   <header class="navbar">
     <div class="nav-container">
-      <div class="logo">
-        <img src="logo.png" alt="Softwork Logo">
-        <span>Softwork Solutions</span>
+      <div class="nav-left">
+        <div class="logo">
+          <img id="logo-img" src="logo.png" alt="Softwork Logo">
+          <span>Softwork Solutions</span>
+        </div>
       </div>
-      <nav>
+
+      <div class="nav-center">
+        <label class="theme-switch">
+          <span class="icon light"><i data-lucide="sun"></i></span>
+          <input type="checkbox" id="theme-toggle">
+          <span class="slider"></span>
+          <span class="icon dark"><i data-lucide="moon"></i></span>
+        </label>
+      </div>
+
+      <div class="nav-right">
         <ul class="nav-links">
           <li><a href="index.html">Home</a></li>
           <li><a href="services.html" class="active">Services</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
-      </nav>
+        <a href="login.html" class="btn login-btn">Login</a>
+      </div>
     </div>
   </header>
 
   <section class="hero">
-    <canvas id="network-bg"></canvas>
+    <canvas id="services-bg"></canvas>
     <div class="hero-inner">
       <h1>Our Services</h1>
       <p>Explore our full capabilities across software, cloud, digital, and strategy</p>
@@ -68,6 +81,12 @@
           <li><i data-lucide="check-circle"></i> Mobile apps (native iOS/Android & hybrid frameworks)</li>
           <li><i data-lucide="check-circle"></i> Bespoke desktop and enterprise software</li>
         </ul>
+        <div class="hover-overlay">
+          <div class="overlay-inner">
+            <h3>More Info</h3>
+            <p>Our custom software solutions are designed to grow with your business. We don't just code — we architect. Whether you need a sleek marketing site, a full-stack enterprise portal, or a cross-platform mobile app, our team ensures performance, scalability, and maintainability from day one. Using frameworks like React, Next.js, and secure backend stacks, we craft digital tools that streamline operations, elevate user experience, and give you a competitive edge. From wireframe to deployment, we work closely with your team to bring your digital vision to life, ensuring every feature is purposeful, and every pixel is polished.</p>
+          </div>
+        </div>
       </div>
 
       <div class="service-detail">
@@ -79,6 +98,12 @@
           <li><i data-lucide="check-circle"></i> Server management & monitoring (on-prem & cloud)</li>
           <li><i data-lucide="check-circle"></i> Cloud migrations, AWS/Azure/GCP consulting</li>
         </ul>
+        <div class="hover-overlay">
+          <div class="overlay-inner">
+            <h3>More Info</h3>
+            <p>Behind every reliable digital product is an even more reliable infrastructure. Our team helps you build a solid cloud foundation using industry leaders like AWS, Azure, and Google Cloud. We handle everything from domain provisioning and scalable hosting to virtual network setup and cloud migration. Need high availability or disaster recovery? We've got you covered. We also provide active monitoring, backup automation, and container orchestration (Docker/Kubernetes) to ensure your systems are always secure, optimized, and future-ready. Whether you're building from scratch or scaling an existing setup, we make your infrastructure worry-free.</p>
+          </div>
+        </div>
       </div>
 
       <div class="service-detail">
@@ -90,6 +115,12 @@
           <li><i data-lucide="check-circle"></i> Document & e-sign integrations</li>
           <li><i data-lucide="check-circle"></i> IoT & robotics solutions for smart operations</li>
         </ul>
+        <div class="hover-overlay">
+          <div class="overlay-inner">
+            <h3>More Info</h3>
+            <p>Stuck in repetitive workflows and outdated systems? Our digital transformation services are designed to reinvent how your business operates. We leverage Robotic Process Automation (RPA), smart workflow engines, and API-driven integrations to eliminate manual tasks and reduce operational bottlenecks. From internal CRM automation to IoT-enabled process control, we tailor solutions that are aligned to your exact needs. We also help you map out inefficiencies, identify cost-saving opportunities, and deploy technologies that dramatically improve agility, speed, and customer satisfaction. It’s not just automation — it’s reinvention.</p>
+          </div>
+        </div>
       </div>
 
       <div class="service-detail">
@@ -101,6 +132,12 @@
           <li><i data-lucide="check-circle"></i> SEM/PPC campaigns (Google Ads, Bing Ads)</li>
           <li><i data-lucide="check-circle"></i> YouTube & video advertising</li>
         </ul>
+        <div class="hover-overlay">
+          <div class="overlay-inner">
+            <h3>More Info</h3>
+            <p>Marketing is no longer a guessing game. Our approach combines data-driven strategies with creative storytelling to drive real growth. We audit and optimize your site for technical SEO, create high-converting ad campaigns across Google and Bing, and help you dominate organic search with powerful content. Need YouTube ads, landing pages, or email funnels? We do it all. Our digital marketing plans are customized around your KPIs — whether that’s leads, conversions, or visibility. With detailed reporting, A/B testing, and constant refinement, we ensure your brand always performs above the curve.</p>
+          </div>
+        </div>
       </div>
 
       <div class="service-detail">
@@ -112,6 +149,12 @@
           <li><i data-lucide="check-circle"></i> Community-building campaigns (Discord, Telegram)</li>
           <li><i data-lucide="check-circle"></i> Influencer partnerships & advocacy programs</li>
         </ul>
+        <div class="hover-overlay">
+          <div class="overlay-inner">
+            <h3>More Info</h3>
+            <p>Your brand’s voice matters — and we help you amplify it. Our social strategy services are designed to grow your digital presence across platforms like Instagram, LinkedIn, TikTok, and more. We help you define your brand tone, build an engaging content calendar, and craft visuals that resonate with your audience. From community management and influencer campaigns to viral content and live engagement tactics, we ensure your social footprint drives real results. It's not just about posting — it's about building loyal communities, real conversations, and a memorable digital identity that scales.</p>
+          </div>
+        </div>
       </div>
 
       <div class="service-detail">
@@ -123,6 +166,12 @@
           <li><i data-lucide="check-circle"></i> Email marketing campaigns</li>
           <li><i data-lucide="check-circle"></i> Video scriptwriting and production support</li>
         </ul>
+        <div class="hover-overlay">
+          <div class="overlay-inner">
+            <h3>More Info</h3>
+            <p>Great content isn’t filler — it’s a business asset. Our team of skilled copywriters and content strategists help you deliver messaging that resonates and drives action. We create blog posts that rank, landing pages that convert, email sequences that engage, and video scripts that tell powerful stories. Everything is tailored to your brand tone, your audience persona, and your campaign objectives. Whether you're B2B or B2C, technical or lifestyle, we make your voice stand out with clarity, precision, and charm — all optimized for both people and algorithms.</p>
+          </div>
+        </div>
       </div>
 
       <div class="service-detail">
@@ -134,6 +183,12 @@
           <li><i data-lucide="check-circle"></i> Requirements engineering & solution architecture</li>
           <li><i data-lucide="check-circle"></i> End-to-end project delivery and support</li>
         </ul>
+        <div class="hover-overlay">
+          <div class="overlay-inner">
+            <h3>More Info</h3>
+            <p>Digital projects are complex — we make them simple. Our consulting team bridges the gap between business needs and technical execution. We help define clear project scopes, map user journeys, set development sprints, and lead delivery from concept to launch. Whether you need help planning a digital transformation roadmap, choosing the right tech stack, or managing cross-functional teams, we bring structure and momentum. Our project managers and solution architects ensure that every stakeholder is aligned, every milestone is measurable, and every deliverable adds value. Think of us as your in-house CTO — without the overhead.</p>
+          </div>
+        </div>
       </div>
 
     </div>
