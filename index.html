@@ -5,13 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Softwork Solutions</title>
   <link rel="stylesheet" href="styles.css" />
-  <link rel="icon" href="logo3.png" type="image/png" />
   <script defer src="script.js"></script>
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="cursor-ghost">
+  <div class="cursor-ghost" id="ghost">
   <div class="ghost-body">
     <div class="face">
       <div class="eyes">
@@ -27,26 +28,39 @@
     <div class="wavy-bottom">
       <div></div><div></div><div></div>
     </div>
-    <div class="speech-bubble">Hi!</div>
+    <div class="speech-bubble">Hi there!</div>
   </div>
 </div>
   <header class="navbar">
     <div class="nav-container">
-      <div class="logo">
-        <img src="logo.png" alt="Softwork Logo">
-        <span>Softwork Solutions</span>
+      <div class="nav-left">
+        <div class="logo">
+          <img id="logo-img" src="logo.png" alt="Softwork Logo">
+          <span>Softwork Solutions</span>
+        </div>
       </div>
-      <nav>
+
+      <div class="nav-center">
+        <label class="theme-switch">
+          <span class="icon light"><i data-lucide="sun"></i></span>
+          <input type="checkbox" id="theme-toggle">
+          <span class="slider"></span>
+          <span class="icon dark"><i data-lucide="moon"></i></span>
+        </label>
+      </div>
+
+      <div class="nav-right">
         <ul class="nav-links">
           <li><a href="index.html" class="active">Home</a></li>
           <li><a href="services.html">Services</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
-      </nav>
+        <a href="login.html" class="btn login-btn">Login</a>
+      </div>
     </div>
   </header>
-  <section class="hero">
+  <section class="hero pre-fade">
     <canvas id="network-bg"></canvas>
     <div class="hero-inner">
       <h1>Powering Your Digital Vision</h1>
@@ -57,7 +71,7 @@
       </div>
     </div>
   </section>
-  <section class="services" id="services">
+  <section class="services pre-fade" id="services">
   <div class="section-header">
     <h2>Our Services</h2>
   </div>
@@ -133,61 +147,107 @@
     </div>
   </div>
 </section>
-
-
-  <section class="why-choose-us">
-    <div class="container">
-      <h2>Why Choose Us</h2>
-      <div class="why-features">
-        <div class="why-feature">
-          <i data-lucide="headphones"></i>
-          <h4>24/7 Support</h4>
-          <p>We’re available anytime you need us, with round-the-clock support to keep your business running.</p>
-        </div>
-        <div class="why-feature">
-          <i data-lucide="bar-chart-3"></i>
-          <h4>Industry Expertise</h4>
-          <p>Years of experience across sectors ensure reliable, scalable, and smart digital solutions.</p>
-        </div>
-        <div class="why-feature">
-          <i data-lucide="layers"></i>
-          <h4>Custom Solutions</h4>
-          <p>We don’t do cookie-cutter. Every solution is tailored to your goals, users, and budget.</p>
-        </div>
+<section class="why-choose-us pre-fade">
+  <div class="container">
+    <h2>Why Choose Us</h2>
+    <div class="why-features">
+      <div class="why-feature">
+        <i data-lucide="headphones"></i>
+        <h4>24/7 Support</h4>
+        <p>We’re available anytime you need us, with round-the-clock support to keep your business running.</p>
+      </div>
+      <div class="why-feature">
+        <i data-lucide="bar-chart-3"></i>
+        <h4>Industry Expertise</h4>
+        <p>Years of experience across sectors ensure reliable, scalable, and smart digital solutions.</p>
+      </div>
+      <div class="why-feature">
+        <i data-lucide="layers"></i>
+        <h4>Custom Solutions</h4>
+        <p>We don’t do cookie-cutter. Every solution is tailored to your goals, users, and budget.</p>
       </div>
     </div>
-  </section>
 
-  <section class="testimonials">
-  <div class="container">
-    <h2>What Our Clients Say</h2>
-    <div class="testimonial-grid">
-      <div class="testimonial-card">
-        <img src="imp1.jpg" alt="Shreak.P Rebel">
-        <blockquote>
-          <p>“Reliable partner for our entire IT needs.”</p>
-        </blockquote>
-        <div class="client-name">Shreak.P Rebel</div>
+    <!-- NEW Values Grid -->
+    <div class="value-grid">
+      <div class="value-card">
+        <i data-lucide="shield-check"></i>
+        <h4>Integrity</h4>
+        <p>We operate with full transparency, honoring trust and ethical standards in everything we do.</p>
       </div>
-      <div class="testimonial-card">
-        <img src="imp2.jpg" alt="Sudakar Vali">
-        <blockquote>
-          <p>“Highly recommend their digital transformation services.”</p>
-        </blockquote>
-        <div class="client-name">Sudakar Vali</div>
+      <div class="value-card">
+        <i data-lucide="zap"></i>
+        <h4>Innovation</h4>
+        <p>Our team thrives on pushing boundaries with modern tools, automation, and smart engineering.</p>
       </div>
-      <div class="testimonial-card">
-        <img src="imp3.jpg" alt="Steve Johnson">
-        <blockquote>
-          <p>“We scaled 3× in 6 months thanks to Softwork.”</p>
-        </blockquote>
-        <div class="client-name">Steve Johnson</div>
+      <div class="value-card">
+        <i data-lucide="heart"></i>
+        <h4>Client First</h4>
+        <p>We prioritize your goals and user experience, treating your business like our own.</p>
+      </div>
+      <div class="value-card">
+        <i data-lucide="globe"></i>
+        <h4>Scalability</h4>
+        <p>Our architecture is built to grow with your business across platforms, regions, and scale.</p>
       </div>
     </div>
   </div>
 </section>
 
-  <section class="cta">
+<section class="testimonials-grid pre-fade">
+  <div class="container">
+    <h2>What Our Clients Say</h2>
+    <div class="testimonial-grid">
+      <div class="testimonial-card">
+        <img src="imp1.jpg" alt="Shreak.P Rebel" />
+        <div class="testimonial-content">
+          <h4>Shreak.P Rebel</h4>
+          <p class="role">VP Tech, Rebel Group</p>
+          <p class="quote">“Softwork isn’t just a vendor — they’re our innovation partner.”</p>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <img src="imp2.jpg" alt="Sudakar Vali" />
+        <div class="testimonial-content">
+          <h4>Sudakar Vali</h4>
+          <p class="role">Director, Vali Systems</p>
+          <p class="quote">“They overdelivered on every milestone. Flawless execution.”</p>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <img src="imp3.jpg" alt="Steve Johnson" />
+        <div class="testimonial-content">
+          <h4>Steve Johnson</h4>
+          <p class="role">Founder, Ascend Tech</p>
+          <p class="quote">“We scaled 3× in 6 months. Their solutions paid for themselves fast.”</p>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <img src="alica.jpg" alt="Alicia Tran" />
+        <div class="testimonial-content">
+          <h4>Alicia Tran</h4>
+          <p class="role">CMO, NovaX</p>
+          <p class="quote">“Brilliant team, smart strategies, and a joy to collaborate with.”</p>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <img src="rahul.jpg" alt="Rahul Dev" />
+        <div class="testimonial-content">
+          <h4>Rahul Dev</h4>
+          <p class="role">Product Head, Brightwave</p>
+          <p class="quote">“Their team became part of ours. Seamless, proactive, and talented.”</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <section class="cta pre-fade">
     <div class="cta-inner">
       <h2>Let’s Build Something Great Together</h2>
       <a href="contact.html" class="btn primary">Schedule a Call</a>
