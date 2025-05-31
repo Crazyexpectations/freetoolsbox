@@ -351,6 +351,19 @@ a{
   gap: 1rem;
 }
 
+.nav-profile-icon {
+  font-size: 28px;
+  color: #00bcd4;
+  transition: transform 0.2s ease;
+}
+
+.nav-profile-icon:hover {
+  transform: scale(1.1);
+  color: #0097a7;
+}
+
+
+
 #theme-toggle {
   background: none;
   border: none;
