@@ -422,17 +422,17 @@ gsap.utils.toArray(".testimonial-card").forEach((card, i) => {
 
 // For log in service things to open
 const formSection = document.querySelector('.onboarding-form-section');
-const formContainer = formSection?.querySelector('.form-container');
+const formElement = formSection?.querySelector('.onboarding-form');
 const loggedMessage = formSection?.querySelector('.logged-message');
 const guestMessage = formSection?.querySelector('.guest-message');
 
 if (formSection) {
   const isLoggedIn = localStorage.getItem('softwork_logged_in') === 'true';
   if (!isLoggedIn) {
-    formContainer.style.display = 'none';
-    guestMessage.style.display = 'block';
+    if (formElement) formElement.style.display = 'none';
+    if (guestMessage) guestMessage.style.display = 'block';
   } else {
-    loggedMessage.style.display = 'block';
+    if (loggedMessage) loggedMessage.style.display = 'block';
   }
 }
 
