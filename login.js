@@ -94,3 +94,19 @@ googleLoginBtn.addEventListener("click", () => {
       alert("Google login failed: " + error.message);
     });
 });
+
+
+auth.signInWithEmailAndPassword(email, password)
+  .then((userCredential) => {
+    localStorage.setItem("softwork_logged_in", "true"); // ✅ ADD THIS
+    alert("Logged in successfully");
+    window.location.href = "services.html"; // ✅ Redirect to services
+  })
+
+
+  auth.signInWithPopup(provider)
+  .then((result) => {
+    localStorage.setItem("softwork_logged_in", "true"); // ✅ ADD THIS
+    alert("Welcome, " + result.user.displayName);
+    window.location.href = "services.html"; // ✅ Redirect to services
+  })
