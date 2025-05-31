@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Our Services | Softwork Solutions</title>
   <link rel="stylesheet" href="services.css" />
-  <link rel="icon" type="image/png" href="logo-light.png">
   <script defer src="script.js"></script>
+  <link rel="icon" type="image/png" href="logo-light.png">
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
@@ -194,6 +194,183 @@
 
     </div>
   </section>
+  <section class="onboarding-form-section">
+  <div class="container">
+    <h2>Client Onboarding Form</h2>
+    <!-- Message shown if NOT logged in -->
+    <p class="form-intro guest-message" style="display: none;">
+      You must be logged in to fill this form. <a href="login.html" class="btn primary">Login</a>
+    </p>
+
+    <!-- Message shown if logged in -->
+    <p class="form-intro logged-message" style="display: none;">
+      Please fill out the form below to start your onboarding with <strong>Softwork Solutions</strong>.
+      This helps us understand your project better and tailor our services to your needs.
+    </p>
+
+    <form class="onboarding-form" action="#" method="POST">
+
+      <!-- 1. Company Information -->
+      <fieldset>
+        <legend>1. Company Information</legend>
+        <label>Company Name <input type="text" name="company_name" required></label>
+        <label>Contact Person <input type="text" name="contact_person" required></label>
+        <label>Position/Title <input type="text" name="position" required></label>
+        <label>Email Address <input type="email" name="email" required></label>
+        <label>Phone Number <input type="tel" name="phone" required></label>
+        <label>Company Website <input type="url" name="website"></label>
+        <label>Business Address <textarea name="address" rows="2"></textarea></label>
+      </fieldset>
+
+      <!-- 2. Project Type -->
+      <fieldset>
+        <legend>2. Project Type</legend>
+        <label><input type="checkbox" name="project_type[]" value="Website Development"> Website Development</label>
+        <label><input type="checkbox" name="project_type[]" value="Custom Software Development"> Custom Software Development</label>
+        <label><input type="checkbox" name="project_type[]" value="SaaS Product Build"> SaaS Product Build</label>
+        <label><input type="checkbox" name="project_type[]" value="Digital Marketing"> Digital Marketing</label>
+        <label>Other: <input type="text" name="project_type_other"></label>
+      </fieldset>
+
+      <!-- 3. Project Overview -->
+      <fieldset>
+        <legend>3. Project Overview</legend>
+        <label>Project Goals <textarea name="goals" rows="3"></textarea></label>
+        <label>Top 3 Priorities <textarea name="priorities" rows="3"></textarea></label>
+      </fieldset>
+
+      <!-- 4. Branding & Design Assets -->
+      <fieldset>
+        <legend>4. Branding & Design Assets</legend>
+        <label>Logo Files
+          <select name="logo_provided">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+          <input type="text" name="logo_notes" placeholder="Notes">
+        </label>
+        <label>Brand Guidelines
+          <select name="brand_provided">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+          <input type="text" name="brand_notes" placeholder="Notes">
+        </label>
+        <label>Existing Website Access
+          <select name="website_access_provided">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+          <input type="text" name="website_notes" placeholder="Notes">
+        </label>
+        <label>Domain Registrar Login
+          <select name="domain_provided">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+          <input type="text" name="domain_notes" placeholder="Notes">
+        </label>
+        <label>Hosting Credentials
+          <select name="hosting_provided">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+          <input type="text" name="hosting_notes" placeholder="Notes">
+        </label>
+      </fieldset>
+
+      <!-- 5. Technical Details -->
+      <fieldset>
+        <legend>5. Technical Details</legend>
+        <label>Preferred CMS or Framework <input type="text" name="cms_framework"></label>
+        <label>Existing Website?
+          <label><input type="radio" name="existing_website" value="Yes"> Yes</label>
+          <label><input type="radio" name="existing_website" value="No"> No</label>
+        </label>
+        <label>Integrations Needed:</label>
+        <label><input type="checkbox" name="integrations[]" value="CRM"> CRM</label>
+        <label><input type="checkbox" name="integrations[]" value="Payment Gateway"> Payment Gateway</label>
+        <label><input type="checkbox" name="integrations[]" value="API"> API</label>
+        <label>Other Technical Requirements <textarea name="other_tech" rows="2"></textarea></label>
+      </fieldset>
+
+      <!-- 6. Content Readiness -->
+      <fieldset>
+        <legend>6. Content Readiness</legend>
+        <label>Text Content
+          <label><input type="radio" name="text_ready" value="Ready"> Ready</label>
+          <label><input type="radio" name="text_ready" value="In Progress"> In Progress</label>
+        </label>
+        <label>Images/Media
+          <label><input type="radio" name="media_ready" value="Ready"> Ready</label>
+          <label><input type="radio" name="media_ready" value="In Progress"> In Progress</label>
+        </label>
+        <label>Product/Service Details
+          <label><input type="radio" name="product_ready" value="Ready"> Ready</label>
+          <label><input type="radio" name="product_ready" value="In Progress"> In Progress</label>
+        </label>
+        <label>Sitemap/Pages List
+          <label><input type="radio" name="sitemap" value="Provided"> Provided</label>
+          <label><input type="radio" name="sitemap" value="TBD"> TBD</label>
+        </label>
+      </fieldset>
+
+      <!-- 7. Access and Logins -->
+      <fieldset>
+        <legend>7. Access and Logins</legend>
+        <label>Accounts/Tools Required <textarea name="access_logins" rows="3" placeholder="Google Analytics, FTP, GitHub, etc."></textarea></label>
+      </fieldset>
+
+      <!-- 8. Project Timeline -->
+      <fieldset>
+        <legend>8. Project Timeline</legend>
+        <label>Desired Start Date <input type="date" name="start_date"></label>
+        <label>Target Launch/Delivery Date <input type="date" name="launch_date"></label>
+        <label>Key Deadlines or Events <textarea name="key_deadlines" rows="2"></textarea></label>
+      </fieldset>
+
+      <!-- 9. Communication Preferences -->
+      <fieldset>
+        <legend>9. Communication Preferences</legend>
+        <label>Preferred Method:
+          <label><input type="checkbox" name="comm_method[]" value="Email"> Email</label>
+          <label><input type="checkbox" name="comm_method[]" value="Slack"> Slack</label>
+          <label><input type="checkbox" name="comm_method[]" value="Phone"> Phone</label>
+          <label><input type="checkbox" name="comm_method[]" value="Other"> Other</label>
+        </label>
+        <label>Project Contacts <input type="text" name="project_contacts"></label>
+        <label>Weekly Updates?
+          <label><input type="radio" name="weekly_updates" value="Yes"> Yes</label>
+          <label><input type="radio" name="weekly_updates" value="No"> No</label>
+        </label>
+      </fieldset>
+
+      <!-- 10. Legal & Billing Info -->
+      <fieldset>
+        <legend>10. Legal & Billing Info</legend>
+        <label>Billing Contact Name <input type="text" name="billing_name"></label>
+        <label>Billing Email <input type="email" name="billing_email"></label>
+        <label>Billing Address <textarea name="billing_address" rows="2"></textarea></label>
+        <label>Tax ID / GST Number <input type="text" name="tax_id"></label>
+        <label>Preferred Payment Method <input type="text" name="payment_method"></label>
+        <label>PO Required?
+          <label><input type="radio" name="po_required" value="Yes"> Yes</label>
+          <label><input type="radio" name="po_required" value="No"> No</label>
+        </label>
+      </fieldset>
+
+      <!-- Signature -->
+      <fieldset>
+        <legend>Client Signature</legend>
+        <label>Signature <input type="text" name="signature" placeholder="Type full name"></label>
+        <label>Date <input type="date" name="signature_date"></label>
+      </fieldset>
+
+      <button type="submit" class="btn primary">Submit Form</button>
+    </form>
+  </div>
+</section>
+
 
   <section class="cta">
     <div class="cta-inner">
