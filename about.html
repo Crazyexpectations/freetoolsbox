@@ -5,13 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About Us - Softwork Solutions</title>
   <link rel="stylesheet" href="aboutstyle.css">
-  <link rel="icon" href="logo3.png" type="image/png" />
   <script defer src="script.js"></script>
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="cursor-ghost">
+  <div class="cursor-ghost" id="ghost">
   <div class="ghost-body">
     <div class="face">
       <div class="eyes">
@@ -27,29 +28,42 @@
     <div class="wavy-bottom">
       <div></div><div></div><div></div>
     </div>
-    <div class="speech-bubble">Hi!</div>
+    <div class="speech-bubble">Hi there!</div>
   </div>
 </div>
 
   <header class="navbar">
     <div class="nav-container">
-      <div class="logo">
-        <img src="logo.png" alt="Softwork Logo">
-        <span>Softwork Solutions</span>
+      <div class="nav-left">
+        <div class="logo">
+          <img id="logo-img" src="logo.png" alt="Softwork Logo">
+          <span>Softwork Solutions</span>
+        </div>
       </div>
-      <nav>
+
+      <div class="nav-center">
+        <label class="theme-switch">
+          <span class="icon light"><i data-lucide="sun"></i></span>
+          <input type="checkbox" id="theme-toggle">
+          <span class="slider"></span>
+          <span class="icon dark"><i data-lucide="moon"></i></span>
+        </label>
+      </div>
+
+      <div class="nav-right">
         <ul class="nav-links">
-          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html" class="active">Home</a></li>
           <li><a href="services.html">Services</a></li>
-          <li><a href="about.html" class="active">About</a></li>
+          <li><a href="about.html">About</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
-      </nav>
+        <a href="login.html" class="btn login-btn">Login</a>
+      </div>
     </div>
   </header>
 
   <section class="hero">
-    <canvas id="network-bg"></canvas>
+    <canvas id="about-bg"></canvas>
     <div class="hero-inner">
       <h1>About Softwork Solutions</h1>
       <p>Discover the team, vision, and mission driving innovation forward.</p>
@@ -76,26 +90,40 @@
 
   <section class="leadership-section">
     <div class="container">
-      <h2>Meet Our Leadership</h2>
-      <div class="leadership-cards">
-        <div class="leader-profile">
-          <img src="Bharat.jpg" alt="Bharat Desavi">
-          <h4>Bharat Desavi</h4>
-          <p>Founder & CEO</p>
+      <h2 class="section-title">Leadership Team</h2>
+      <p class="section-subtitle">Meet the visionaries driving Softwork Solutions forward</p>
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-img">
+            <img src="Bharat.jpg" alt="Bharat Desavi">
+          </div>
+          <div class="team-info">
+            <h3>Bharat Desavi</h3>
+            <p class="role">Founder & CEO</p>
+          </div>
         </div>
-        <div class="leader-profile">
-          <img src="Siya.jpg" alt="Siya Jos">
-          <h4>Shruti V</h4>
-          <p>Chief Strategy Officer</p>
+        <div class="team-card">
+          <div class="team-img">
+            <img src="Siya.jpg" alt="Siya Jos">
+          </div>
+          <div class="team-info">
+            <h3>Siya Rodrogiz</h3>
+            <p class="role">Chief Strategy Officer</p>
+          </div>
         </div>
-        <div class="leader-profile">
-          <img src="Arjun.jpg" alt="Arjun Manothra">
-          <h4>Arjun M</h4>
-          <p>Chief Technology Officer</p>
+        <div class="team-card">
+          <div class="team-img">
+            <img src="samio.jpg" alt="Samio Dazi">
+          </div>
+          <div class="team-info">
+            <h3>Samio Dazi</h3>
+            <p class="role">Chief Technology Officer</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
+
 
   <section class="values-section">
     <div class="container">
@@ -145,5 +173,6 @@
   </footer>
 
   <script>lucide.createIcons();</script>
+  
 </body>
 </html>
