@@ -439,13 +439,18 @@ const guestMessage = formSection?.querySelector('.guest-message');
 
 if (formSection) {
   const isLoggedIn = localStorage.getItem('softwork_logged_in') === 'true';
-  if (!isLoggedIn) {
-    if (formElement) formElement.style.display = 'none';
-    if (guestMessage) guestMessage.style.display = 'block';
-  } else {
+
+  if (isLoggedIn) {
+    if (formElement) formElement.style.display = 'block';
     if (loggedMessage) loggedMessage.style.display = 'block';
+    if (guestMessage) guestMessage.style.display = 'none';
+  } else {
+    if (formElement) formElement.style.display = 'none';
+    if (loggedMessage) loggedMessage.style.display = 'none';
+    if (guestMessage) guestMessage.style.display = 'block';
   }
 }
+
 
 const isLoggedIn = localStorage.getItem("softwork_logged_in") === "true";
 const loginBtn = document.getElementById("login-button");
