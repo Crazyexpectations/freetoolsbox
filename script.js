@@ -355,7 +355,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (profileIconLink) profileIconLink.style.display = "inline-flex";
   }
 
+  lucide.createIcons();
+  
 });
+
 
 
 // === GSAP SECTION ANIMATIONS ===
@@ -430,6 +433,8 @@ gsap.utils.toArray(".testimonial-card").forEach((card, i) => {
     ease: "power2.out"
   });
 });
+
+
 
 // For log in service things to open
 const formSection = document.querySelector('.onboarding-form-section');
