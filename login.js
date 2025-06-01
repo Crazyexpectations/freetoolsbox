@@ -87,8 +87,9 @@ googleLoginBtn.addEventListener("click", () => {
   const provider = new firebase.auth.GoogleAuthProvider();
   auth.signInWithPopup(provider)
     .then((result) => {
+      localStorage.setItem("softwork_logged_in", "true"); // ✅ Must set this!
       alert("Welcome, " + result.user.displayName);
-      window.location.href = "index.html";
+      window.location.href = "services.html"; // ✅ Redirect after login
     })
     .catch((error) => {
       alert("Google login failed: " + error.message);
@@ -110,3 +111,4 @@ auth.signInWithEmailAndPassword(email, password)
     alert("Welcome, " + result.user.displayName);
     window.location.href = "services.html"; // ✅ Redirect to services
   })
+
