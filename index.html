@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,26 +13,29 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
   <div class="cursor-ghost" id="ghost">
-  <div class="ghost-body">
-    <div class="face">
-      <div class="eyes">
-        <div class="eye left"></div>
-        <div class="eye right"></div>
+    <div class="ghost-body">
+      <div class="face">
+        <div class="eyes">
+          <div class="eye left"></div>
+          <div class="eye right"></div>
+        </div>
+        <div class="mouth"></div>
       </div>
-      <div class="mouth"></div>
+      <div class="hands">
+        <div class="hand left-hand"></div>
+        <div class="hand right-hand"></div>
+      </div>
+      <div class="wavy-bottom">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <div class="speech-bubble">Hi there!</div>
     </div>
-    <div class="hands">
-      <div class="hand left-hand"></div>
-      <div class="hand right-hand"></div>
-    </div>
-    <div class="wavy-bottom">
-      <div></div><div></div><div></div>
-    </div>
-    <div class="speech-bubble">Hi there!</div>
   </div>
-</div>
   <header class="navbar">
     <div class="nav-container">
       <div class="nav-left">
@@ -40,16 +44,19 @@
           <span>Softwork Solutions</span>
         </div>
       </div>
-
+      <div class="mobile-only">
+        <button class="menu-toggle" id="menu-toggle" aria-label="Menu">
+          <i data-lucide="menu"></i>
+        </button>
+      </div>
       <div class="nav-center">
         <label class="theme-switch">
           <span class="icon light"><i data-lucide="sun"></i></span>
-          <input type="checkbox" id="theme-toggle">
+          <input type="checkbox" id="theme-toggle" />
           <span class="slider"></span>
           <span class="icon dark"><i data-lucide="moon"></i></span>
         </label>
       </div>
-
       <div class="nav-right">
         <ul class="nav-links">
           <li><a href="index.html" class="active">Home</a></li>
@@ -76,179 +83,179 @@
     </div>
   </section>
   <section class="services pre-fade" id="services">
-  <div class="section-header">
-    <h2>Our Services</h2>
-  </div>
-  <div class="service-grid">
-    <div class="service-card">
-      <i data-lucide="code"></i>
-      <h3>Custom Software & Web Development</h3>
-      <ul>
-        <li><i data-lucide="check-circle"></i> Responsive websites (HTML5, React, Next.js)</li>
-        <li><i data-lucide="check-circle"></i> Mobile apps (native iOS/Android & hybrid frameworks)</li>
-        <li><i data-lucide="check-circle"></i> Bespoke desktop and enterprise software</li>
-      </ul>
+    <div class="section-header">
+      <h2>Our Services</h2>
     </div>
-
-    <div class="service-card">
-      <i data-lucide="server"></i>
-      <h3>IT Infrastructure & Cloud Solutions</h3>
-      <ul>
-        <li><i data-lucide="check-circle"></i> Domain registration, hosting & CDN setup</li>
-        <li><i data-lucide="check-circle"></i> Server management & monitoring (on-prem & cloud)</li>
-        <li><i data-lucide="check-circle"></i> Cloud migrations, AWS/Azure/GCP consulting</li>
-      </ul>
-    </div>
-
-    <div class="service-card">
-      <i data-lucide="refresh-cw"></i>
-      <h3>Digital Transformation & Automation</h3>
-      <ul>
-        <li><i data-lucide="check-circle"></i> Business process automation (RPA, workflow engines)</li>
-        <li><i data-lucide="check-circle"></i> Document & e-sign integrations</li>
-        <li><i data-lucide="check-circle"></i> IoT & robotics solutions for smart operations</li>
-      </ul>
-    </div>
-
-    <div class="service-card">
-      <i data-lucide="trending-up"></i>
-      <h3>Digital Marketing & SEO</h3>
-      <ul>
-        <li><i data-lucide="check-circle"></i> Search Engine Optimization (on-page & technical SEO)</li>
-        <li><i data-lucide="check-circle"></i> SEM/PPC campaigns (Google Ads, Bing Ads)</li>
-        <li><i data-lucide="check-circle"></i> YouTube & video advertising</li>
-      </ul>
-    </div>
-
-    <div class="service-card">
-      <i data-lucide="users"></i>
-      <h3>Social Media & Brand Strategy</h3>
-      <ul>
-        <li><i data-lucide="check-circle"></i> Social media marketing (FB, IG, LinkedIn, TikTok)</li>
-        <li><i data-lucide="check-circle"></i> Community-building (Discord, Telegram)</li>
-        <li><i data-lucide="check-circle"></i> Influencer partnerships & advocacy programs</li>
-      </ul>
-    </div>
-
-    <div class="service-card">
-      <i data-lucide="file-text"></i>
-      <h3>Content & Copywriting Services</h3>
-      <ul>
-        <li><i data-lucide="check-circle"></i> Content strategy & creation (blogs, whitepapers)</li>
-        <li><i data-lucide="check-circle"></i> Email marketing campaigns</li>
-        <li><i data-lucide="check-circle"></i> Video scriptwriting & production support</li>
-      </ul>
-    </div>
-
-    <div class="service-card">
-      <i data-lucide="briefcase"></i>
-      <h3>Consulting & Project Management</h3>
-      <ul>
-        <li><i data-lucide="check-circle"></i> Technical & strategic IT consulting</li>
-        <li><i data-lucide="check-circle"></i> Requirements engineering & solution architecture</li>
-        <li><i data-lucide="check-circle"></i> End-to-end project delivery & support</li>
-      </ul>
-    </div>
-  </div>
-</section>
-<section class="why-choose-us pre-fade">
-  <div class="container">
-    <h2>Why Choose Us</h2>
-    <div class="why-features">
-      <div class="why-feature">
-        <i data-lucide="headphones"></i>
-        <h4>24/7 Support</h4>
-        <p>We’re available anytime you need us, with round-the-clock support to keep your business running.</p>
+    <div class="service-grid">
+      <div class="service-card">
+        <i data-lucide="code"></i>
+        <h3>Custom Software & Web Development</h3>
+        <ul>
+          <li><i data-lucide="check-circle"></i> Responsive websites (HTML5, React, Next.js)</li>
+          <li><i data-lucide="check-circle"></i> Mobile apps (native iOS/Android & hybrid frameworks)</li>
+          <li><i data-lucide="check-circle"></i> Bespoke desktop and enterprise software</li>
+        </ul>
       </div>
-      <div class="why-feature">
-        <i data-lucide="bar-chart-3"></i>
-        <h4>Industry Expertise</h4>
-        <p>Years of experience across sectors ensure reliable, scalable, and smart digital solutions.</p>
+
+      <div class="service-card">
+        <i data-lucide="server"></i>
+        <h3>IT Infrastructure & Cloud Solutions</h3>
+        <ul>
+          <li><i data-lucide="check-circle"></i> Domain registration, hosting & CDN setup</li>
+          <li><i data-lucide="check-circle"></i> Server management & monitoring (on-prem & cloud)</li>
+          <li><i data-lucide="check-circle"></i> Cloud migrations, AWS/Azure/GCP consulting</li>
+        </ul>
       </div>
-      <div class="why-feature">
-        <i data-lucide="layers"></i>
-        <h4>Custom Solutions</h4>
-        <p>We don’t do cookie-cutter. Every solution is tailored to your goals, users, and budget.</p>
+
+      <div class="service-card">
+        <i data-lucide="refresh-cw"></i>
+        <h3>Digital Transformation & Automation</h3>
+        <ul>
+          <li><i data-lucide="check-circle"></i> Business process automation (RPA, workflow engines)</li>
+          <li><i data-lucide="check-circle"></i> Document & e-sign integrations</li>
+          <li><i data-lucide="check-circle"></i> IoT & robotics solutions for smart operations</li>
+        </ul>
+      </div>
+
+      <div class="service-card">
+        <i data-lucide="trending-up"></i>
+        <h3>Digital Marketing & SEO</h3>
+        <ul>
+          <li><i data-lucide="check-circle"></i> Search Engine Optimization (on-page & technical SEO)</li>
+          <li><i data-lucide="check-circle"></i> SEM/PPC campaigns (Google Ads, Bing Ads)</li>
+          <li><i data-lucide="check-circle"></i> YouTube & video advertising</li>
+        </ul>
+      </div>
+
+      <div class="service-card">
+        <i data-lucide="users"></i>
+        <h3>Social Media & Brand Strategy</h3>
+        <ul>
+          <li><i data-lucide="check-circle"></i> Social media marketing (FB, IG, LinkedIn, TikTok)</li>
+          <li><i data-lucide="check-circle"></i> Community-building (Discord, Telegram)</li>
+          <li><i data-lucide="check-circle"></i> Influencer partnerships & advocacy programs</li>
+        </ul>
+      </div>
+
+      <div class="service-card">
+        <i data-lucide="file-text"></i>
+        <h3>Content & Copywriting Services</h3>
+        <ul>
+          <li><i data-lucide="check-circle"></i> Content strategy & creation (blogs, whitepapers)</li>
+          <li><i data-lucide="check-circle"></i> Email marketing campaigns</li>
+          <li><i data-lucide="check-circle"></i> Video scriptwriting & production support</li>
+        </ul>
+      </div>
+
+      <div class="service-card">
+        <i data-lucide="briefcase"></i>
+        <h3>Consulting & Project Management</h3>
+        <ul>
+          <li><i data-lucide="check-circle"></i> Technical & strategic IT consulting</li>
+          <li><i data-lucide="check-circle"></i> Requirements engineering & solution architecture</li>
+          <li><i data-lucide="check-circle"></i> End-to-end project delivery & support</li>
+        </ul>
       </div>
     </div>
-
-    <!-- NEW Values Grid -->
-    <div class="value-grid">
-      <div class="value-card">
-        <i data-lucide="shield-check"></i>
-        <h4>Integrity</h4>
-        <p>We operate with full transparency, honoring trust and ethical standards in everything we do.</p>
-      </div>
-      <div class="value-card">
-        <i data-lucide="zap"></i>
-        <h4>Innovation</h4>
-        <p>Our team thrives on pushing boundaries with modern tools, automation, and smart engineering.</p>
-      </div>
-      <div class="value-card">
-        <i data-lucide="heart"></i>
-        <h4>Client First</h4>
-        <p>We prioritize your goals and user experience, treating your business like our own.</p>
-      </div>
-      <div class="value-card">
-        <i data-lucide="globe"></i>
-        <h4>Scalability</h4>
-        <p>Our architecture is built to grow with your business across platforms, regions, and scale.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="testimonials-grid pre-fade">
-  <div class="container">
-    <h2>What Our Clients Say</h2>
-    <div class="testimonial-grid">
-      <div class="testimonial-card">
-        <img src="imp1.jpg" alt="Shreak.P Rebel" />
-        <div class="testimonial-content">
-          <h4>Shreak.P Rebel</h4>
-          <p class="role">VP Tech, Rebel Group</p>
-          <p class="quote">“Softwork isn’t just a vendor — they’re our innovation partner.”</p>
+  </section>
+  <section class="why-choose-us pre-fade">
+    <div class="container">
+      <h2>Why Choose Us</h2>
+      <div class="why-features">
+        <div class="why-feature">
+          <i data-lucide="headphones"></i>
+          <h4>24/7 Support</h4>
+          <p>We’re available anytime you need us, with round-the-clock support to keep your business running.</p>
+        </div>
+        <div class="why-feature">
+          <i data-lucide="bar-chart-3"></i>
+          <h4>Industry Expertise</h4>
+          <p>Years of experience across sectors ensure reliable, scalable, and smart digital solutions.</p>
+        </div>
+        <div class="why-feature">
+          <i data-lucide="layers"></i>
+          <h4>Custom Solutions</h4>
+          <p>We don’t do cookie-cutter. Every solution is tailored to your goals, users, and budget.</p>
         </div>
       </div>
 
-      <div class="testimonial-card">
-        <img src="imp2.jpg" alt="Sudakar Vali" />
-        <div class="testimonial-content">
-          <h4>Sudakar Vali</h4>
-          <p class="role">Director, Vali Systems</p>
-          <p class="quote">“They overdelivered on every milestone. Flawless execution.”</p>
+      <!-- NEW Values Grid -->
+      <div class="value-grid">
+        <div class="value-card">
+          <i data-lucide="shield-check"></i>
+          <h4>Integrity</h4>
+          <p>We operate with full transparency, honoring trust and ethical standards in everything we do.</p>
         </div>
-      </div>
-
-      <div class="testimonial-card">
-        <img src="imp3.jpg" alt="Steve Johnson" />
-        <div class="testimonial-content">
-          <h4>Steve Johnson</h4>
-          <p class="role">Founder, Ascend Tech</p>
-          <p class="quote">“We scaled 3× in 6 months. Their solutions paid for themselves fast.”</p>
+        <div class="value-card">
+          <i data-lucide="zap"></i>
+          <h4>Innovation</h4>
+          <p>Our team thrives on pushing boundaries with modern tools, automation, and smart engineering.</p>
         </div>
-      </div>
-
-      <div class="testimonial-card">
-        <img src="alica.jpg" alt="Alicia Tran" />
-        <div class="testimonial-content">
-          <h4>Alicia Tran</h4>
-          <p class="role">CMO, NovaX</p>
-          <p class="quote">“Brilliant team, smart strategies, and a joy to collaborate with.”</p>
+        <div class="value-card">
+          <i data-lucide="heart"></i>
+          <h4>Client First</h4>
+          <p>We prioritize your goals and user experience, treating your business like our own.</p>
         </div>
-      </div>
-
-      <div class="testimonial-card">
-        <img src="rahul.jpg" alt="Rahul Dev" />
-        <div class="testimonial-content">
-          <h4>Rahul Dev</h4>
-          <p class="role">Product Head, Brightwave</p>
-          <p class="quote">“Their team became part of ours. Seamless, proactive, and talented.”</p>
+        <div class="value-card">
+          <i data-lucide="globe"></i>
+          <h4>Scalability</h4>
+          <p>Our architecture is built to grow with your business across platforms, regions, and scale.</p>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+
+  <section class="testimonials-grid pre-fade">
+    <div class="container">
+      <h2>What Our Clients Say</h2>
+      <div class="testimonial-grid">
+        <div class="testimonial-card">
+          <img src="imp1.jpg" alt="Shreak.P Rebel" />
+          <div class="testimonial-content">
+            <h4>Shreak.P Rebel</h4>
+            <p class="role">VP Tech, Rebel Group</p>
+            <p class="quote">“Softwork isn’t just a vendor — they’re our innovation partner.”</p>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <img src="imp2.jpg" alt="Sudakar Vali" />
+          <div class="testimonial-content">
+            <h4>Sudakar Vali</h4>
+            <p class="role">Director, Vali Systems</p>
+            <p class="quote">“They overdelivered on every milestone. Flawless execution.”</p>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <img src="imp3.jpg" alt="Steve Johnson" />
+          <div class="testimonial-content">
+            <h4>Steve Johnson</h4>
+            <p class="role">Founder, Ascend Tech</p>
+            <p class="quote">“We scaled 3× in 6 months. Their solutions paid for themselves fast.”</p>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <img src="alica.jpg" alt="Alicia Tran" />
+          <div class="testimonial-content">
+            <h4>Alicia Tran</h4>
+            <p class="role">CMO, NovaX</p>
+            <p class="quote">“Brilliant team, smart strategies, and a joy to collaborate with.”</p>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <img src="rahul.jpg" alt="Rahul Dev" />
+          <div class="testimonial-content">
+            <h4>Rahul Dev</h4>
+            <p class="role">Product Head, Brightwave</p>
+            <p class="quote">“Their team became part of ours. Seamless, proactive, and talented.”</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
 
   <section class="cta pre-fade">
@@ -260,28 +267,41 @@
 
   <footer class="footer">
     <div class="container">
-      <div class="footer-top">
+      <div class="footer-grid">
+        <!-- Brand Info -->
         <div class="footer-brand">
           <img src="logo.png" alt="Softwork">
-          <p>Softwork Solutions – Powering Digital Vision</p>
+          <p>Softwork Solutions<br>Powering Digital Vision</p>
         </div>
+
+        <!-- Quick Links -->
         <div class="footer-links">
+          <h4>Quick Links</h4>
           <a href="index.html">Home</a>
           <a href="services.html">Services</a>
           <a href="about.html">About</a>
           <a href="contact.html">Contact</a>
         </div>
-        <div class="socials">
+
+        <!-- Socials / Legal -->
+        <div class="footer-socials">
+          <h4>Connect</h4>
           <a href="#">LinkedIn</a>
           <a href="#">Twitter</a>
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="#">Policy</a>
         </div>
       </div>
+
       <div class="footer-bottom">
         <p>© 2025 Softwork Solutions. All rights reserved.</p>
       </div>
     </div>
   </footer>
 
+
   <script>lucide.createIcons();</script>
 </body>
+
 </html>
