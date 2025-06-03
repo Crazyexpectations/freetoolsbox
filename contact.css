@@ -8,16 +8,24 @@ body {
   overflow-x: hidden;
 }
 
-a{
+a {
   text-decoration: none;
   list-style-type: none;
   color: #000;
 }
 
 @keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .container {
@@ -62,13 +70,13 @@ a{
 .ghost-body {
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at center, rgba(0,255,255,0.35), rgba(0,188,212,0.15));
+  background: radial-gradient(circle at center, rgba(0, 255, 255, 0.35), rgba(0, 188, 212, 0.15));
   border-radius: 50% 50% 30% 30% / 60% 60% 40% 40%;
-  border: 1px solid rgba(0,255,255,0.4);
+  border: 1px solid rgba(0, 255, 255, 0.4);
   box-shadow:
     0 0 4px rgba(0, 0, 0, 0.3),
-    0 0 10px rgba(0,255,255,0.25),
-    inset 0 0 6px rgba(0,255,255,0.2);
+    0 0 10px rgba(0, 255, 255, 0.25),
+    inset 0 0 6px rgba(0, 255, 255, 0.2);
   backdrop-filter: blur(4px);
   display: flex;
   flex-direction: column;
@@ -84,10 +92,12 @@ a{
   flex-direction: column;
   align-items: center;
 }
+
 .eyes {
   display: flex;
   gap: 4px;
 }
+
 .eye {
   width: 4px;
   height: 4px;
@@ -95,10 +105,20 @@ a{
   border-radius: 50%;
   animation: blink 4s infinite;
 }
+
 @keyframes blink {
-  0%, 100% { height: 4px; }
-  48%, 52% { height: 1px; }
+
+  0%,
+  100% {
+    height: 4px;
+  }
+
+  48%,
+  52% {
+    height: 1px;
+  }
 }
+
 .mouth {
   width: 8px;
   height: 4px;
@@ -106,10 +126,12 @@ a{
   border-radius: 0 0 6px 6px;
   margin-top: 2px;
 }
+
 .cursor-ghost.happy .mouth {
   height: 5px;
   border-radius: 0 0 10px 10px;
 }
+
 .cursor-ghost.surprised .mouth {
   width: 5px;
   height: 5px;
@@ -127,24 +149,33 @@ a{
   justify-content: space-between;
   padding: 0 3px;
 }
+
 .hand {
   width: 8px;
   height: 14px;
   background: radial-gradient(circle at 40% 30%, #00e5ff, #006064);
   border-radius: 50% 50% 40% 40%;
-  box-shadow: inset 0 1px 2px rgba(255,255,255,0.3), 0 0 3px rgba(0,255,255,0.3);
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.3), 0 0 3px rgba(0, 255, 255, 0.3);
   animation: handWave 2s ease-in-out infinite alternate;
   transform-origin: top center;
 }
+
 .left-hand {
   animation-delay: 0s;
 }
+
 .right-hand {
   animation-delay: 1s;
 }
+
 @keyframes handWave {
-  0% { transform: rotate(10deg); }
-  100% { transform: rotate(-10deg); }
+  0% {
+    transform: rotate(10deg);
+  }
+
+  100% {
+    transform: rotate(-10deg);
+  }
 }
 
 /* Bouncy bottom */
@@ -154,6 +185,7 @@ a{
   gap: 2px;
   margin-top: 4px;
 }
+
 .wavy-bottom div {
   width: 6px;
   height: 6px;
@@ -161,15 +193,23 @@ a{
   border-radius: 50%;
   animation: bounce 1s infinite ease-in-out alternate;
 }
+
 .wavy-bottom div:nth-child(2) {
   animation-delay: 0.2s;
 }
+
 .wavy-bottom div:nth-child(3) {
   animation-delay: 0.4s;
 }
+
 @keyframes bounce {
-  from { transform: translateY(0); }
-  to { transform: translateY(-2px); }
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-2px);
+  }
 }
 
 /* Speech Bubble */
@@ -185,9 +225,10 @@ a{
   border-radius: 8px;
   opacity: 0;
   white-space: nowrap;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
+
 .cursor-ghost.show-bubble .speech-bubble {
   opacity: 1;
   transform: translateX(-50%) scale(1);
@@ -202,6 +243,7 @@ a{
   top: 0;
   z-index: 1000;
 }
+
 .nav-container {
   display: flex;
   justify-content: space-between;
@@ -210,10 +252,92 @@ a{
   gap: 1rem;
 }
 
-.nav-left, .nav-center, .nav-right {
+.menu-toggle {
+  padding: 0.5rem;
+  z-index: 3000;
+  /* Make sure it sits above hero bg */
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #000;
+  cursor: pointer;
+}
+
+.mobile-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #fff;
+  color: #000;
+  z-index: 9999;
+  transform: translateX(-100%);
+  /* This hides it offscreen initially */
+  transition: transform 0.4s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* vertical centering */
+  align-items: center;
+  gap: 1.2rem;
+  padding: 2rem 1rem;
+  overflow-y: auto;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Style all nav links inside mobile drawer */
+.mobile-nav a {
+  display: block;
+  font-size: 1.2rem;
+  width: 100%;
+  max-width: 300px;
+  text-align: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  color: inherit;
+}
+
+.mobile-nav.open {
+  transform: translateX(0%);
+  /* This slides it into view */
+}
+
+.mobile-nav .close-btn {
+    position: absolute;
+    top: 4.2rem;
+    right: 3.2rem;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    color: inherit;
+    z-index: 99999;
+    cursor: pointer;
+  }
+
+.mobile-only {
+  display: none;
+}
+
+
+.nav-left,
+.nav-center,
+.nav-right {
   display: flex;
   align-items: center;
   gap: 1rem;
+}
+
+.nav-profile-icon {
+  font-size: 28px;
+  color: #00bcd4;
+  transition: transform 0.2s ease;
+}
+
+.nav-profile-icon:hover {
+  transform: scale(1.1);
+  color: #0097a7;
 }
 
 .nav-center {
@@ -273,11 +397,11 @@ a{
   transition: 0.4s;
 }
 
-.theme-switch input:checked + .slider {
+.theme-switch input:checked+.slider {
   background-color: #00bcd4;
 }
 
-.theme-switch input:checked + .slider::before {
+.theme-switch input:checked+.slider::before {
   transform: translateX(24px);
 }
 
@@ -295,19 +419,23 @@ a{
 .btn.login-btn:hover {
   background-color: #00acc1;
 }
+
 .logo {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
+
 .logo img {
   width: 40px;
 }
+
 .logo span {
   color: #000;
   font-size: 1.3rem;
   font-weight: 700;
 }
+
 .nav-links {
   list-style: none;
   display: flex;
@@ -375,8 +503,10 @@ body.dark #theme-toggle {
 }
 
 .hero {
-  position: relative; /* Make hero a positioned container */
-  overflow: hidden;   /* Hide anything overflowing */
+  position: relative;
+  /* Make hero a positioned container */
+  overflow: hidden;
+  /* Hide anything overflowing */
   background: linear-gradient(-45deg, #005f99, #005f99, #3397c8);
   background-size: 400% 400%;
   animation: gradientShift 10s ease infinite;
@@ -387,13 +517,16 @@ body.dark #theme-toggle {
   text-align: center;
   padding: 2rem;
 }
+
 .hero-inner {
   max-width: 800px;
 }
+
 .hero h1 {
   font-size: 3rem;
   margin-bottom: 1rem;
 }
+
 .hero p {
   font-size: 1.25rem;
   color: #d0d0d0;
@@ -402,6 +535,7 @@ body.dark #theme-toggle {
 .cta-buttons {
   margin-top: 2rem;
 }
+
 .btn {
   padding: 0.8rem 1.6rem;
   border-radius: 8px;
@@ -411,15 +545,18 @@ body.dark #theme-toggle {
   display: inline-block;
   transition: all 0.3s ease;
 }
+
 .btn.primary {
   background-color: #00bcd4;
   color: black;
 }
+
 .btn.secondary {
   border: 1px solid #fff;
   color: white;
   background: transparent;
 }
+
 .btn:hover {
   opacity: 0.85;
 }
@@ -446,10 +583,10 @@ body.dark #theme-toggle {
   min-width: 340px;
   background-color: #fff;
   color: #000000;
-  border: 1px solid rgba(0,0,0,0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   padding: 2.5rem;
   border-radius: 16px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
 .contact-form h2 {
@@ -509,10 +646,10 @@ body.dark #theme-toggle {
   min-width: 300px;
   background-color: #fff;
   color: #000;
-  border: 1px solid rgba(0,0,0,0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   padding: 2.5rem;
   border-radius: 16px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.05);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
 }
 
 .contact-form p,
@@ -536,7 +673,7 @@ body.dark #theme-toggle {
 
 .contact-info .info-card {
   padding: 0.6rem 0;
-  border-bottom: 1px dashed rgba(0,0,0,0.1);
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
 }
 
 .contact-info .info-card:last-child {
@@ -578,19 +715,12 @@ body.dark #theme-toggle {
 }
 
 /* Footer */
-.footer {
-  background-color: #ffffff;
-  padding: 3rem 2rem;
-  color: #000000;
-  font-size: 0.95rem;
-}
-
-.footer-top {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 2rem;
-  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .footer-brand img {
@@ -598,29 +728,30 @@ body.dark #theme-toggle {
   margin-bottom: 0.5rem;
 }
 
-.footer-links,
-.socials {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+.footer h4 {
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+  color: #00bcd4;
 }
 
 .footer-links a,
-.socials a {
+.footer-socials a {
+  display: block;
+  margin-bottom: 0.5rem;
   text-decoration: none;
-  color: #000000;
+  color: #000;
   transition: color 0.3s ease;
 }
 
 .footer-links a:hover,
-.socials a:hover {
+.footer-socials a:hover {
   color: #00bcd4;
 }
 
 .footer-bottom {
+  margin-top: 2rem;
   text-align: center;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  padding-top: 1rem;
+  font-size: 0.9rem;
   color: #666;
 }
 
@@ -630,7 +761,7 @@ body.dark {
   color: #eee;
 }
 
-body.dark a{
+body.dark a {
   color: #fff;
 }
 
@@ -646,6 +777,10 @@ body.dark .logo span,
 body.dark .nav-links a,
 body.dark .footer-links a,
 body.dark .socials a {
+  color: #fff;
+}
+
+body.dark .menu-toggle {
   color: #fff;
 }
 
@@ -714,9 +849,17 @@ body.dark .theme-switch .icon.dark {
 }
 
 
-/* Footer links hover */
+body.dark .footer-grid {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark .footer-links a,
+body.dark .footer-socials a {
+  color: #fff;
+}
+
 body.dark .footer-links a:hover,
-body.dark .socials a:hover {
+body.dark .footer-socials a:hover {
   color: #00bcd4;
 }
 
@@ -725,13 +868,104 @@ body.dark .socials a:hover {
   .hero h1 {
     font-size: 2rem;
   }
+
   .nav-links {
     flex-direction: column;
     gap: 1rem;
   }
+
   .footer-top {
     flex-direction: column;
     align-items: center;
     text-align: center;
   }
+
+  /* ✅ Show menu toggle button only on mobile */
+  .menu-toggle {
+    display: block;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #000;
+    cursor: pointer;
+  }
+
+  .theme-switch {
+    display: none;
+  }
+
+  /* ✅ Hide nav items for mobile */
+  .nav-center,
+  .nav-right .nav-links,
+  .nav-right .btn.login-btn,
+  .nav-right #profile-icon-link {
+    display: none;
+  }
+
+
+  .mobile-nav.open {
+    transform: translateX(0);
+  }
+
+  .mobile-nav a {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .mobile-nav .close-btn {
+    position: absolute;
+    top: 1.2rem;
+    right: 3.2rem;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    color: inherit;
+    z-index: 99999;
+    cursor: pointer;
+  }
+
+  .mobile-nav .theme-switch {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+    width: 100%;
+  }
+
+  .theme-switch {
+    position: absolute;
+    top: 1.2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 99999;
+  }
+
+
+
+  body.dark .mobile-nav {
+    background-color: #000;
+    color: #fff;
+  }
+
+  body.dark .menu-toggle {
+    color: #fff;
+  }
+
+  .mobile-only {
+    display: block;
+  }
+
+  /* ✅ Support dark mode in mobile nav */
+  body.dark .mobile-nav {
+    background-color: #000;
+    color: #fff;
+  }
+
+  body.dark .menu-toggle {
+    color: #fff;
+  }
+
 }
