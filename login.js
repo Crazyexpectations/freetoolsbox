@@ -5,7 +5,7 @@ const firebaseConfig = {
   apiKey: "AIzaSyCQsc-_nnGKlxHfhMBD4rIovrjLla0yp-4",
   authDomain: "software-solutions-f17c1.firebaseapp.com",
   projectId: "software-solutions-f17c1",
-  storageBucket: "software-solutions-f17c1.firebasestorage.app",
+  storageBucket: "software-solutions-f17c1.appspot.com",
   messagingSenderId: "911290181585",
   appId: "1:911290181585:web:30109dccae395055aa62f0"
 };
@@ -18,16 +18,20 @@ const auth = firebase.auth();
 const loginForm = document.getElementById("login-form");
 const signupForm = document.getElementById("signup-form");
 const forgotPasswordLink = document.getElementById("forgot-password");
+
 const googleLoginBtn = document.getElementById("google-login");
+const facebookLoginBtn = document.getElementById("facebook-login");
+const githubLoginBtn = document.getElementById("github-login");
+const appleLoginBtn = document.getElementById("apple-login");
 
 const loginSection = document.getElementById("auth-container");
 const signupSection = document.getElementById("signup-container");
 
+// Toggle between login and signup views
 document.getElementById("toggle-signup").addEventListener("click", () => {
   loginSection.style.display = "none";
   signupSection.style.display = "block";
 });
-
 document.getElementById("toggle-login").addEventListener("click", () => {
   signupSection.style.display = "none";
   loginSection.style.display = "block";
@@ -40,25 +44,27 @@ loginForm.addEventListener("submit", (e) => {
   const password = document.getElementById("login-password").value;
 
   auth.signInWithEmailAndPassword(email, password)
-    .then((userCredential) => {
+    .then(() => {
+      localStorage.setItem("softwork_logged_in", "true");
       alert("Logged in successfully");
-      window.location.href = "index.html";
+      window.location.href = "services.html";
     })
     .catch((error) => {
       alert("Login failed: " + error.message);
     });
 });
 
-// Signup
+// Signup with Email/Password
 signupForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const email = document.getElementById("signup-email").value;
   const password = document.getElementById("signup-password").value;
 
   auth.createUserWithEmailAndPassword(email, password)
-    .then((userCredential) => {
+    .then(() => {
+      localStorage.setItem("softwork_logged_in", "true");
       alert("Account created successfully");
-      window.location.href = "index.html";
+      window.location.href = "services.html";
     })
     .catch((error) => {
       alert("Signup failed: " + error.message);
@@ -82,33 +88,48 @@ forgotPasswordLink.addEventListener("click", (e) => {
     });
 });
 
-// Google Sign-In
-googleLoginBtn.addEventListener("click", () => {
-  const provider = new firebase.auth.GoogleAuthProvider();
+// Unified Sign-in handler for social providers
+function signInWithProvider(provider) {
   auth.signInWithPopup(provider)
     .then((result) => {
-      localStorage.setItem("softwork_logged_in", "true"); // ✅ Must set this!
-      alert("Welcome, " + result.user.displayName);
-      window.location.href = "services.html"; // ✅ Redirect after login
+      localStorage.setItem("softwork_logged_in", "true");
+      const name = result.user.displayName || result.user.email;
+      alert("Welcome, " + name);
+      window.location.href = "services.html";
     })
     .catch((error) => {
-      alert("Google login failed: " + error.message);
+      alert("Login failed: " + error.message);
     });
-});
+}
 
+// Google Login
+if (googleLoginBtn) {
+  googleLoginBtn.addEventListener("click", () => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    signInWithProvider(provider);
+  });
+}
 
-auth.signInWithEmailAndPassword(email, password)
-  .then((userCredential) => {
-    localStorage.setItem("softwork_logged_in", "true"); // ✅ ADD THIS
-    alert("Logged in successfully");
-    window.location.href = "services.html"; // ✅ Redirect to services
-  })
+// Facebook Login
+if (facebookLoginBtn) {
+  facebookLoginBtn.addEventListener("click", () => {
+    const provider = new firebase.auth.FacebookAuthProvider();
+    signInWithProvider(provider);
+  });
+}
 
+// GitHub Login
+if (githubLoginBtn) {
+  githubLoginBtn.addEventListener("click", () => {
+    const provider = new firebase.auth.GithubAuthProvider();
+    signInWithProvider(provider);
+  });
+}
 
-  auth.signInWithPopup(provider)
-  .then((result) => {
-    localStorage.setItem("softwork_logged_in", "true"); // ✅ ADD THIS
-    alert("Welcome, " + result.user.displayName);
-    window.location.href = "services.html"; // ✅ Redirect to services
-  })
-
+// Apple Login
+if (appleLoginBtn) {
+  appleLoginBtn.addEventListener("click", () => {
+    const provider = new firebase.auth.OAuthProvider('apple.com');
+    signInWithProvider(provider);
+  });
+}
