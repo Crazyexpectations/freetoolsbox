@@ -97,6 +97,40 @@ document.addEventListener('DOMContentLoaded', () => {
     mouse.y = e.clientY + scrollY - 70;
   });
 
+  // === Mobile Menu Toggle ===
+  const menuToggle = document.getElementById('menu-toggle');
+
+  const mobileNav = document.createElement('div');
+  mobileNav.classList.add('mobile-nav');
+  mobileNav.innerHTML = `
+  <button class="close-btn" aria-label="Close"><i data-lucide="x"></i></button>
+  <label class="theme-switch">
+    <span class="icon light"><i data-lucide="sun"></i></span>
+    <input type="checkbox" id="mobile-theme-toggle">
+    <span class="slider"></span>
+    <span class="icon dark"><i data-lucide="moon"></i></span>
+  </label>
+  <a href="index.html">Home</a>
+  <a href="services.html">Services</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+  <a href="login.html" class="btn login-btn">Login</a>
+`;
+
+  document.body.appendChild(mobileNav);
+  lucide.createIcons();
+
+  menuToggle?.addEventListener('click', () => {
+    console.log("Menu toggle clicked"); // ✅ Add this log
+    mobileNav.classList.add('open');
+  });
+
+  mobileNav.querySelector('.close-btn')?.addEventListener('click', () => {
+    console.log("Menu close clicked"); // ✅ Add this log
+    mobileNav.classList.remove('open');
+  });
+
+
   // === CANVAS BACKGROUND EFFECTS ===
   function networkEffect(canvasId) {
     const canvas = document.getElementById(canvasId);
@@ -341,6 +375,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const savedTheme = saved === null ? false : saved === 'true';
     console.log('Initial dark mode:', savedTheme);
     applyTheme(savedTheme);
+    const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+
+    if (mobileThemeToggle) {
+      // Sync with stored value
+      const saved = localStorage.getItem('darkMode');
+      mobileThemeToggle.checked = saved === 'true';
+
+      mobileThemeToggle.addEventListener('change', () => {
+        const isDark = mobileThemeToggle.checked;
+        applyTheme(isDark);
+        if (themeToggle) themeToggle.checked = isDark; // Keep both toggles in sync
+      });
+    }
   } else {
     console.warn('Theme toggle element not found!');
   }
@@ -349,14 +396,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const isLoggedIn = localStorage.getItem("softwork_logged_in") === "true";
   const loginBtn = document.getElementById("login-button");
   const profileIconLink = document.getElementById("profile-icon-link");
-  
+
   if (isLoggedIn) {
     if (loginBtn) loginBtn.style.display = "none";
     if (profileIconLink) profileIconLink.style.display = "inline-flex";
   }
 
   lucide.createIcons();
-  
+
 });
 
 
