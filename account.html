@@ -94,6 +94,9 @@
     firebase.auth().onAuthStateChanged(user => {
       document.getElementById("loading-msg").style.display = "none";
       if (user) {
+        // ✅ Set localStorage on successful login
+        localStorage.setItem("softwork_logged_in", "true");
+
         document.getElementById("user-pic").src = user.photoURL || 'default.png';
         document.getElementById("user-pic").style.display = "inline-block";
         document.getElementById("user-name").textContent = user.displayName;
@@ -123,12 +126,15 @@
           });
 
       } else {
+        // User not logged in — redirect after short delay
         setTimeout(() => window.location.href = "login.html", 1000);
       }
     });
 
     function logout() {
       firebase.auth().signOut().then(() => {
+        // ✅ Clear login flag on logout
+        localStorage.removeItem("softwork_logged_in");
         window.location.href = "login.html";
       });
     }
