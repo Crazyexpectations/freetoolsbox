@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
   <a href="services.html">Services</a>
   <a href="about.html">About</a>
   <a href="contact.html">Contact</a>
-  <a href="login.html" class="btn login-btn">Login</a>
+  <a href="join.html" class="btn login-btn">Login</a>
 `;
 
   document.body.appendChild(mobileNav);
