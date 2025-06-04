@@ -511,3 +511,13 @@ if (isLoggedIn) {
   if (loginBtn) loginBtn.style.display = "none";
   if (profileIconLink) profileIconLink.style.display = "inline-flex";
 }
+
+// Global logout function
+window.logout = function () {
+  firebase.auth().signOut().then(() => {
+    localStorage.removeItem("softwork_logged_in");
+    window.location.href = "join.html";
+  }).catch((error) => {
+    alert("Logout failed: " + error.message);
+  });
+};
