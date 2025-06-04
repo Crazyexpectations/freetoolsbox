@@ -282,7 +282,7 @@ a {
   /* vertical centering */
   align-items: center;
   gap: 1.2rem;
-  padding: 2rem 1rem;
+  /* padding: 2rem 1rem; */
   overflow-y: auto;
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
 }
@@ -305,16 +305,16 @@ a {
 }
 
 .mobile-nav .close-btn {
-    position: absolute;
-    top: 4.2rem;
-    right: 3.2rem;
-    background: none;
-    border: none;
-    font-size: 1.8rem;
-    color: inherit;
-    z-index: 99999;
-    cursor: pointer;
-  }
+  position: absolute;
+  top: 4.2rem;
+  right: 3.2rem;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  color: inherit;
+  z-index: 99999;
+  cursor: pointer;
+}
 
 .mobile-only {
   display: none;
@@ -916,7 +916,7 @@ body.dark .footer-socials a:hover {
 
   .mobile-nav .close-btn {
     position: absolute;
-    top: 1.2rem;
+    top: 4.2rem;
     right: 3.2rem;
     background: none;
     border: none;
