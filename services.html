@@ -28,45 +28,6 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
   </script>
-  <script>
-    firebase.auth().onAuthStateChanged((user) => {
-      if (!user) return;
-
-      const onboardingForm = document.querySelector(".onboarding-form");
-      if (!onboardingForm) return;
-
-      onboardingForm.addEventListener("submit", async function (e) {
-        e.preventDefault();
-
-        const formData = new FormData(onboardingForm);
-        const data = {};
-
-        formData.forEach((value, key) => {
-          if (data[key]) {
-            if (Array.isArray(data[key])) {
-              data[key].push(value);
-            } else {
-              data[key] = [data[key], value];
-            }
-          } else {
-            data[key] = value;
-          }
-        });
-
-        data.email = user.email;
-        data.timestamp = firebase.firestore.FieldValue.serverTimestamp();
-
-        try {
-          await db.collection("onboarding_submissions").add(data);
-          alert("Your onboarding form has been submitted successfully!");
-          onboardingForm.reset();
-        } catch (error) {
-          console.error("Submission failed:", error);
-          alert("Submission failed: " + error.message);
-        }
-      });
-    });
-  </script>
 </head>
 
 <body>
