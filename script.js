@@ -114,8 +114,20 @@ document.addEventListener('DOMContentLoaded', () => {
   <a href="services.html">Services</a>
   <a href="about.html">About</a>
   <a href="contact.html">Contact</a>
-  <a href="join.html" class="btn login-btn">Login</a>
+  ${isLoggedIn
+      ? `<a href="#" class="btn login-btn" id="mobile-logout">Logout</a>`
+      : `<a href="join.html" class="btn login-btn">Login</a>`
+    }
 `;
+
+  document.getElementById("mobile-logout")?.addEventListener("click", (e) => {
+    e.preventDefault();
+    firebase.auth().signOut().then(() => {
+      localStorage.removeItem("softwork_logged_in");
+      window.location.href = "join.html";
+    });
+  });
+
 
   document.body.appendChild(mobileNav);
   lucide.createIcons();
