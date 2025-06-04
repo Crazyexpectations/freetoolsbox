@@ -484,24 +484,45 @@ gsap.utils.toArray(".testimonial-card").forEach((card, i) => {
 
 
 // For log in service things to open
-const formSection = document.querySelector('.onboarding-form-section');
-const formElement = formSection?.querySelector('.onboarding-form');
-const loggedMessage = formSection?.querySelector('.logged-message');
-const guestMessage = formSection?.querySelector('.guest-message');
+// === Onboarding Form Submission Handler ===
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.querySelector(".onboarding-form");
 
-if (formSection) {
-  const isLoggedIn = localStorage.getItem('softwork_logged_in') === 'true';
+  firebase.auth().onAuthStateChanged(async (user) => {
+    if (!user || !form) return;
 
-  if (isLoggedIn) {
-    if (formElement) formElement.style.display = 'block';
-    if (loggedMessage) loggedMessage.style.display = 'block';
-    if (guestMessage) guestMessage.style.display = 'none';
-  } else {
-    if (formElement) formElement.style.display = 'none';
-    if (loggedMessage) loggedMessage.style.display = 'none';
-    if (guestMessage) guestMessage.style.display = 'block';
-  }
-}
+    form.addEventListener("submit", async function (e) {
+      e.preventDefault(); // ✅ stop the default reload
+
+      const formData = new FormData(form);
+      const data = {};
+
+      formData.forEach((value, key) => {
+        if (data[key]) {
+          if (Array.isArray(data[key])) {
+            data[key].push(value);
+          } else {
+            data[key] = [data[key], value];
+          }
+        } else {
+          data[key] = value;
+        }
+      });
+
+      data.email = user.email;
+      data.timestamp = firebase.firestore.FieldValue.serverTimestamp();
+
+      try {
+        await db.collection("onboarding_submissions").add(data);
+        alert("✅ Your onboarding form has been submitted successfully!");
+        form.reset();
+      } catch (err) {
+        console.error("❌ Submission failed:", err);
+        alert("❌ Submission failed: " + err.message);
+      }
+    });
+  });
+});
 
 
 const isLoggedIn = localStorage.getItem("softwork_logged_in") === "true";
