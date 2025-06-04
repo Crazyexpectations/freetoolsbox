@@ -98,10 +98,13 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // === Mobile Menu Toggle ===
+  const isLoggedIn = localStorage.getItem("softwork_logged_in") === "true";
+
   const menuToggle = document.getElementById('menu-toggle');
 
   const mobileNav = document.createElement('div');
   mobileNav.classList.add('mobile-nav');
+
   mobileNav.innerHTML = `
   <button class="close-btn" aria-label="Close"><i data-lucide="x"></i></button>
   <label class="theme-switch">
@@ -114,33 +117,30 @@ document.addEventListener('DOMContentLoaded', () => {
   <a href="services.html">Services</a>
   <a href="about.html">About</a>
   <a href="contact.html">Contact</a>
-  ${isLoggedIn
-      ? `<a href="#" class="btn login-btn" id="mobile-logout">Logout</a>`
-      : `<a href="join.html" class="btn login-btn">Login</a>`
-    }
+  ${isLoggedIn ? `<a href="#" class="btn login-btn" id="mobile-logout">Logout</a>` : `<a href="join.html" class="btn login-btn">Login</a>`}
 `;
-
-  document.getElementById("mobile-logout")?.addEventListener("click", (e) => {
-    e.preventDefault();
-    firebase.auth().signOut().then(() => {
-      localStorage.removeItem("softwork_logged_in");
-      window.location.href = "join.html";
-    });
-  });
-
 
   document.body.appendChild(mobileNav);
   lucide.createIcons();
 
+  // Attach logout handler after element is added
+  if (isLoggedIn) {
+    document.getElementById("mobile-logout")?.addEventListener("click", (e) => {
+      e.preventDefault();
+      firebase.auth().signOut().then(() => {
+        localStorage.removeItem("softwork_logged_in");
+        window.location.href = "join.html";
+      });
+    });
+  }
+
   menuToggle?.addEventListener('click', () => {
-    console.log("Menu toggle clicked"); // ✅ Add this log
     mobileNav.classList.add('open');
   });
-
   mobileNav.querySelector('.close-btn')?.addEventListener('click', () => {
-    console.log("Menu close clicked"); // ✅ Add this log
     mobileNav.classList.remove('open');
   });
+
 
 
   // === CANVAS BACKGROUND EFFECTS ===
