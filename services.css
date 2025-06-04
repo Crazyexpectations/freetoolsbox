@@ -673,6 +673,8 @@ body.dark #theme-toggle {
 }
 
 .onboarding-form {
+  max-width: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -908,8 +910,10 @@ body.dark .onboarding-form button:hover {
 }
 
 @media (max-width: 768px) {
-  .onboarding-form-section {
-    padding: 2rem 1.25rem;
+  .onboarding-form {
+    padding: 0; /* ensure no side padding pushing it */
+    width: 100%;
+    max-width: 100%;
   }
 
   .onboarding-form fieldset {
@@ -920,8 +924,8 @@ body.dark .onboarding-form button:hover {
   .onboarding-form textarea,
   .onboarding-form select {
     width: 100%;
-    box-sizing: border-box;
     max-width: 100%;
+    box-sizing: border-box;
   }
 }
 
