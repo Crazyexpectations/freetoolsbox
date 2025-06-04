@@ -198,13 +198,6 @@
           container.innerHTML = "<p style='color:red;'>Failed to load forms.</p>";
         });
     });
-
-    function logout() {
-      firebase.auth().signOut().then(() => {
-        localStorage.removeItem("softwork_logged_in");
-        window.location.href = "join.html";
-      });
-    }
   </script>
 </body>
 </html>
