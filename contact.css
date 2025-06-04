@@ -888,6 +888,25 @@ body.dark .footer-brand p{
     text-align: center;
   }
 
+  .footer-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .footer-brand,
+  .footer-links,
+  .footer-socials {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .footer-bottom {
+    padding: 0 1rem;
+    text-align: center;
+  }
+
   /* ✅ Show menu toggle button only on mobile */
   .menu-toggle {
     display: block;
