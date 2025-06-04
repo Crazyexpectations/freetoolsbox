@@ -276,7 +276,7 @@ body {
   /* vertical centering */
   align-items: center;
   gap: 1.2rem;
-  padding: 2rem 1rem;
+  /* padding: 2rem 1rem; */
   overflow-y: auto;
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
 }
@@ -1046,6 +1046,10 @@ body.dark .footer-socials a:hover {
     left: auto; /* override hover behavior */
   }
 
+  body.dark .hover-overlay {
+  background-color: #1e1e1e;
+  color: #ffffff;
+}
 
 
   body.dark .mobile-nav {
