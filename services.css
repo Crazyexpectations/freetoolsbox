@@ -9,7 +9,9 @@ body {
   overflow-x: hidden;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -917,8 +919,9 @@ body.dark .onboarding-form button:hover {
   .onboarding-form input,
   .onboarding-form textarea,
   .onboarding-form select {
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
+    width: 100%;
+    box-sizing: border-box;
+    max-width: 100%;
   }
 }
 
@@ -1050,17 +1053,18 @@ body.dark .footer-socials a:hover {
 
   .hover-overlay .overlay-inner {
     padding-top: 1rem;
-    border-top: 1px solid rgba(0,0,0,0.1);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
   }
 
   .service-detail:hover .hover-overlay {
-    left: auto; /* override hover behavior */
+    left: auto;
+    /* override hover behavior */
   }
 
   body.dark .hover-overlay {
-  background-color: #1e1e1e;
-  color: #ffffff;
-}
+    background-color: #1e1e1e;
+    color: #ffffff;
+  }
 
 
   body.dark .mobile-nav {
