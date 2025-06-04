@@ -1,10 +1,16 @@
 body {
   position: relative;
+  max-width: 100%;
   /* overflow: hidden; */
   margin: 0;
   font-family: 'Inter', sans-serif;
   background-color: #f9f9f9;
   color: #ffffff;
+  overflow-x: hidden;
+}
+
+html{
+  max-width: 100%;
   overflow-x: hidden;
 }
 
@@ -580,7 +586,7 @@ body.dark #theme-toggle {
 /* Form Styling */
 .contact-form {
   flex: 1;
-  min-width: 240px;
+  min-width: 340px;
   background-color: #fff;
   color: #000000;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -643,7 +649,7 @@ body.dark #theme-toggle {
 /* Info Cards */
 .contact-info {
   flex: 1;
-  min-width: 300px;
+  min-width: 340px;
   background-color: #fff;
   color: #000;
   border: 1px solid rgba(0, 0, 0, 0.1);
