@@ -876,10 +876,6 @@ body.dark #theme-toggle {
   margin-bottom: 0.5rem;
 }
 
-.footer-brand p{
-  color: #000;
-}
-
 .footer h4 {
   font-size: 1rem;
   margin-bottom: 0.75rem;
@@ -1017,10 +1013,6 @@ body.dark .footer-socials a:hover {
   color: #00bcd4;
 }
 
-body.dark .footer-brand p{
-  color: #fff;
-}
-
 
 @media (max-width: 768px) {
   .hero h1 {
@@ -1035,6 +1027,25 @@ body.dark .footer-brand p{
   .footer-top {
     flex-direction: column;
     align-items: center;
+    text-align: center;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .footer-brand,
+  .footer-links,
+  .footer-socials {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .footer-bottom {
+    padding: 0 1rem;
     text-align: center;
   }
 
