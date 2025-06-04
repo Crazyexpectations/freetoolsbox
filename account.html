@@ -66,10 +66,10 @@
     </div>
   </header>
 
-  <!-- HERO SECTION -->
-  <section class="hero">
-    <canvas id="network-bg"></canvas>
-    <div class="hero-inner">
+  <!-- HERO SECTION with fixed background canvas -->
+  <section class="hero" style="position: relative;">
+    <canvas id="network-bg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;"></canvas>
+    <div class="hero-inner" style="position: relative; z-index: 2;">
       <h1>Welcome to Your Dashboard</h1>
       <p>Manage your profile and view your submissions</p>
     </div>
@@ -89,37 +89,56 @@
     <div id="form-submissions">Loading your submissions...</div>
   </section>
 
-  <!-- LOGOUT + FIREBASE HANDLER -->
+  <!-- FIREBASE AUTH + SUBMISSION FETCHING -->
   <script>
     firebase.auth().onAuthStateChanged(user => {
       document.getElementById("loading-msg").style.display = "none";
+
       if (user) {
+        // Show user info
         document.getElementById("user-pic").src = user.photoURL || 'default.png';
         document.getElementById("user-pic").style.display = "inline-block";
-        document.getElementById("user-name").textContent = user.displayName || 'User';
+        document.getElementById("user-name").textContent = user.displayName || "User";
         document.getElementById("user-email").textContent = user.email;
 
+        // Fetch user submissions
         db.collection("onboarding_submissions")
           .where("email", "==", user.email)
           .orderBy("timestamp", "desc")
           .get()
           .then(snapshot => {
             const container = document.getElementById("form-submissions");
-            container.innerHTML = snapshot.empty ? "<p>No forms found.</p>" : "";
+            container.innerHTML = "";
+
+            if (snapshot.empty) {
+              container.innerHTML = "<p>No forms found.</p>";
+              return;
+            }
+
             snapshot.forEach(doc => {
               const data = doc.data();
+              const submittedDate = data.timestamp?.toDate?.().toLocaleString?.() || "Unknown";
+              const company = data.company_name || "N/A";
+
               const div = document.createElement("div");
-              div.style.cssText = "border:1px solid #ccc; border-radius:8px; padding:1rem; margin-bottom:1rem";
+              div.style.cssText = `
+                border: 1px solid #ccc;
+                border-radius: 8px;
+                padding: 1rem;
+                margin-bottom: 1.5rem;
+                background-color: white;
+                color: black;
+              `;
               div.innerHTML = `
-                <p><strong>Company:</strong> ${data.company_name || 'N/A'}</p>
-                <p><strong>Submitted:</strong> ${data.timestamp?.toDate().toLocaleString() || 'Unknown'}</p>
+                <p><strong>Company:</strong> ${company}</p>
+                <p><strong>Submitted:</strong> ${submittedDate}</p>
               `;
               container.appendChild(div);
             });
           })
-          .catch(err => {
-            document.getElementById("form-submissions").textContent = "Error loading forms.";
-            console.error(err);
+          .catch(error => {
+            console.error("Error fetching submissions:", error);
+            document.getElementById("form-submissions").textContent = "Failed to load forms.";
           });
 
       } else {
