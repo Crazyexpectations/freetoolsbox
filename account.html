@@ -29,15 +29,16 @@
     const auth = firebase.auth();
     const db = firebase.firestore();
   </script>
+  <!-- CUSTOM DASHBOARD STYLING -->
   <style>
     .form-card {
       background-color: #ffffff;
       color: #000;
       border: 1px solid #ddd;
       border-radius: 10px;
-      padding: 1.5rem;
+      padding: 1.25rem;
       margin-bottom: 1.5rem;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
       transition: transform 0.2s ease;
     }
 
@@ -57,12 +58,21 @@
 
     body.dark .form-card {
       background-color: #1e1e1e;
-      color: #fff;
+      color: #eee;
       border: 1px solid #444;
+    }
+
+    body.dark #user-box {
+      background-color: #1e1e1e;
+      color: #eee;
     }
 
     body.dark .form-card h3 {
       color: #00bcd4;
+    }
+
+    #form-submissions p {
+      text-align: center;
     }
   </style>
 </head>
@@ -70,10 +80,36 @@
 <body>
   <div class="cursor-ghost" id="ghost"></div>
 
-  <!-- NAVBAR -->
+  <!-- NAVIGATION -->
   <header class="navbar">
-    <!-- UNCHANGED -->
-    <!-- ... same as before ... -->
+    <div class="nav-container">
+      <div class="nav-left">
+        <div class="logo">
+          <img src="logo.png" alt="Logo" />
+          <span>Softwork Solutions</span>
+        </div>
+      </div>
+      <div class="mobile-only">
+        <button class="menu-toggle" id="menu-toggle"><i data-lucide="menu"></i></button>
+      </div>
+      <div class="nav-center">
+        <label class="theme-switch">
+          <span class="icon light"><i data-lucide="sun"></i></span>
+          <input type="checkbox" id="theme-toggle">
+          <span class="slider"></span>
+          <span class="icon dark"><i data-lucide="moon"></i></span>
+        </label>
+      </div>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <button class="btn login-btn" onclick="logout()">Logout</button>
+      </div>
+    </div>
   </header>
 
   <!-- HERO SECTION -->
@@ -81,49 +117,53 @@
     <canvas id="network-bg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;"></canvas>
     <div class="hero-inner" style="position: relative; z-index: 2;">
       <h1>Welcome to Your Dashboard</h1>
-      <p>Manage your profile and view your submissions</p>
+      <p>Manage your profile and track your onboarding progress</p>
     </div>
   </section>
 
-  <!-- USER INFO -->
-  <section class="container" style="text-align:center; margin-top: 2rem;">
+  <!-- USER INFO CARD -->
+  <section class="container" id="account-summary" style="margin-top: 3rem; text-align:center;">
     <p id="loading-msg">Checking login status...</p>
-    <img id="user-pic" src="" alt="Profile Picture" style="width: 100px; border-radius: 50%; display:none;" />
-    <h2 id="user-name" style="color: var(--text-color, #000);"></h2>
-    <p id="user-email" style="color: var(--text-color, #000);"></p>
+    <div id="user-box" style="display:none; padding: 2rem; background:#fff; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); max-width: 600px; margin: auto;">
+      <img id="user-pic" src="" alt="Profile Picture" style="width: 100px; border-radius: 50%;" />
+      <h2 id="user-name"></h2>
+      <p id="user-email"></p>
+      <p><strong>Total Forms Submitted:</strong> <span id="form-count">0</span></p>
+    </div>
   </section>
 
-  <!-- DASHBOARD / SUBMISSIONS -->
-  <section class="container" style="margin-top: 3rem;">
-    <h2 style="color: var(--text-color, #000); text-align:center;">Submitted Forms</h2>
-    <div id="form-submissions" style="margin-top: 2rem;">Loading your submissions...</div>
+  <!-- FORM TRACKER -->
+  <section class="container" style="margin-top: 2rem;">
+    <h2 style="text-align:center;">Recent Submissions</h2>
+    <div id="form-submissions" style="margin-top: 1.5rem;">Loading your submissions...</div>
   </section>
 
+  <!-- FIREBASE SCRIPT -->
   <script>
     firebase.auth().onAuthStateChanged(user => {
       document.getElementById("loading-msg").style.display = "none";
+      if (!user) return setTimeout(() => window.location.href = "join.html", 1500);
 
-      if (!user) {
-        return setTimeout(() => window.location.href = "join.html", 1200);
-      }
+      const name = user.displayName || "User";
+      const email = user.email || "Unknown";
 
-      // Display user info
       document.getElementById("user-pic").src = user.photoURL || 'default.png';
-      document.getElementById("user-pic").style.display = "inline-block";
-      document.getElementById("user-name").textContent = user.displayName || "User";
-      document.getElementById("user-email").textContent = user.email;
+      document.getElementById("user-name").textContent = name;
+      document.getElementById("user-email").textContent = email;
+      document.getElementById("user-box").style.display = "block";
 
-      // Fetch form submissions
+      const container = document.getElementById("form-submissions");
       db.collection("onboarding_submissions")
-        .where("email", "==", user.email)
+        .where("email", "==", email)
         .orderBy("timestamp", "desc")
         .get()
         .then(snapshot => {
-          const container = document.getElementById("form-submissions");
           container.innerHTML = "";
+          const count = snapshot.size;
+          document.getElementById("form-count").textContent = count;
 
-          if (snapshot.empty) {
-            container.innerHTML = "<p>No submissions found yet.</p>";
+          if (count === 0) {
+            container.innerHTML = "<p>No forms found yet.</p>";
             return;
           }
 
@@ -131,23 +171,26 @@
             const data = doc.data();
             const company = data.company_name || "N/A";
             const contact = data.contact_person || "N/A";
-            const submitted = data.timestamp?.toDate().toLocaleString() || "Unknown";
-            const projectTypes = Array.isArray(data.project_type) ? data.project_type.join(", ") : data.project_type_other || "N/A";
+            const date = data.timestamp?.toDate().toLocaleString() || "Unknown";
+            const project = Array.isArray(data.project_type) ? data.project_type.join(", ") : (data.project_type_other || "N/A");
+
+            const progress = company && project ? "✅ Complete" : "⏳ In Progress";
 
             const card = document.createElement("div");
             card.classList.add("form-card");
             card.innerHTML = `
               <h3>${company}</h3>
               <p><strong>Contact:</strong> ${contact}</p>
-              <p><strong>Submitted:</strong> ${submitted}</p>
-              <p><strong>Project Type:</strong> ${projectTypes}</p>
+              <p><strong>Submitted:</strong> ${date}</p>
+              <p><strong>Project Type:</strong> ${project}</p>
+              <p><strong>Status:</strong> ${progress}</p>
             `;
             container.appendChild(card);
           });
         })
         .catch(error => {
-          console.error("Error fetching submissions:", error);
-          document.getElementById("form-submissions").innerHTML = "<p style='color:red;'>Failed to load submissions.</p>";
+          console.error("Error loading forms:", error);
+          container.innerHTML = "<p style='color:red;'>Failed to load forms.</p>";
         });
     });
 
