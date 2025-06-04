@@ -31,39 +31,46 @@
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       const onboardingForm = document.querySelector(".onboarding-form");
-      if (onboardingForm) {
-        onboardingForm.addEventListener("submit", function (e) {
-          e.preventDefault();
+      if (!onboardingForm) return;
 
-          const formData = new FormData(this);
-          const data = {};
+      onboardingForm.addEventListener("submit", async function (e) {
+        e.preventDefault();
 
-          formData.forEach((value, key) => {
-            if (data[key]) {
-              if (Array.isArray(data[key])) {
-                data[key].push(value);
-              } else {
-                data[key] = [data[key], value];
-              }
+        const user = firebase.auth().currentUser;
+        if (!user) {
+          alert("You must be logged in to submit the form.");
+          return;
+        }
+
+        const formData = new FormData(onboardingForm);
+        const data = {};
+
+        formData.forEach((value, key) => {
+          if (data[key]) {
+            if (Array.isArray(data[key])) {
+              data[key].push(value);
             } else {
-              data[key] = value;
+              data[key] = [data[key], value];
             }
-          });
-
-          db.collection("onboarding_submissions").add({
-            ...data,
-            timestamp: firebase.firestore.FieldValue.serverTimestamp()
-          })
-            .then(() => {
-              alert("Your onboarding form has been submitted successfully!");
-              onboardingForm.reset();
-            })
-            .catch((error) => {
-              alert("Submission failed: " + error.message);
-            });
+          } else {
+            data[key] = value;
+          }
         });
-      }
+
+        data.email = user.email; // 🔐 Secure, overrides user-typed value
+        data.timestamp = firebase.firestore.FieldValue.serverTimestamp();
+
+        try {
+          await db.collection("onboarding_submissions").add(data);
+          alert("Your onboarding form has been submitted successfully!");
+          onboardingForm.reset();
+        } catch (error) {
+          console.error("Submission failed:", error);
+          alert("Submission failed: " + error.message);
+        }
+      });
     });
+
   </script>
 </head>
 
@@ -320,9 +327,13 @@
           <label>Company Name <input type="text" name="company_name" required></label>
           <label>Contact Person <input type="text" name="contact_person" required></label>
           <label>Position/Title <input type="text" name="position" required></label>
-          <label>Email Address <input type="email" name="email" required></label>
           <label>Phone Number <input type="tel" name="phone" required></label>
-          <label>Company Website <input type="url" name="website"></label>
+          <label>
+            Company Website
+            <input type="text" name="website" placeholder="https://example.com">
+            <br>
+            <small><input type="checkbox" id="no-website"> We don’t have a website</small>
+          </label>
           <label>Business Address <textarea name="address" rows="2"></textarea></label>
         </fieldset>
 
