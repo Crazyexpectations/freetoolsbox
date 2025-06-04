@@ -876,6 +876,10 @@ body.dark #theme-toggle {
   margin-bottom: 0.5rem;
 }
 
+.footer-brand p{
+  color: #000;
+}
+
 .footer h4 {
   font-size: 1rem;
   margin-bottom: 0.75rem;
@@ -1011,6 +1015,10 @@ body.dark .footer-socials a {
 body.dark .footer-links a:hover,
 body.dark .footer-socials a:hover {
   color: #00bcd4;
+}
+
+body.dark .footer-brand p{
+  color: #fff;
 }
 
 
