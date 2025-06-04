@@ -903,11 +903,18 @@ body.dark .onboarding-form button:hover {
 
 @media (max-width: 768px) {
   .onboarding-form-section {
-    padding: 2rem 1rem;
+    padding: 2rem 1.25rem;
   }
 
   .onboarding-form fieldset {
     padding: 1rem;
+  }
+
+  .onboarding-form input,
+  .onboarding-form textarea,
+  .onboarding-form select {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
   }
 }
 
