@@ -1,15 +1,3 @@
-const firebaseConfig = {
-  apiKey: "AIzaSyCQsc-_nnGKlxHfhMBD4rIovrjLla0yp-4",
-  authDomain: "software-solutions-f17c1.firebaseapp.com",
-  projectId: "software-solutions-f17c1",
-  storageBucket: "software-solutions-f17c1.appspot.com",
-  messagingSenderId: "911290181585",
-  appId: "1:911290181585:web:30109dccae395055aa62f0"
-};
-
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-
 
 document.addEventListener('DOMContentLoaded', () => {
   const ghost = document.querySelector('.cursor-ghost');
@@ -513,46 +501,6 @@ if (formSection) {
     if (loggedMessage) loggedMessage.style.display = 'none';
     if (guestMessage) guestMessage.style.display = 'block';
   }
-}
-
-const onboardingForm = document.querySelector(".onboarding-form");
-if (onboardingForm) {
-  onboardingForm.addEventListener("submit", async function (e) {
-    e.preventDefault();
-
-    const user = firebase.auth().currentUser;
-    if (!user) {
-      alert("You must be logged in to submit the form.");
-      return;
-    }
-
-    const formData = new FormData(onboardingForm);
-    const data = {};
-
-    formData.forEach((value, key) => {
-      if (data[key]) {
-        if (Array.isArray(data[key])) {
-          data[key].push(value);
-        } else {
-          data[key] = [data[key], value];
-        }
-      } else {
-        data[key] = value;
-      }
-    });
-
-    data.email = user.email;
-    data.timestamp = firebase.firestore.FieldValue.serverTimestamp();
-
-    try {
-      await db.collection("onboarding_submissions").add(data);
-      alert("Form submitted successfully!");
-      onboardingForm.reset();
-    } catch (error) {
-      console.error("Submission failed:", error);
-      alert("Submission failed: " + error.message);
-    }
-  });
 }
 
 
