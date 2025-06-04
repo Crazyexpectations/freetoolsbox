@@ -29,39 +29,41 @@
     const db = firebase.firestore();
   </script>
   <script>
-    const onboardingForm = document.querySelector(".onboarding-form");
-    if (onboardingForm) {
-      onboardingForm.addEventListener("submit", function (e) {
-        e.preventDefault();
+    document.addEventListener("DOMContentLoaded", function () {
+      const onboardingForm = document.querySelector(".onboarding-form");
+      if (onboardingForm) {
+        onboardingForm.addEventListener("submit", function (e) {
+          e.preventDefault();
 
-        const formData = new FormData(this);
-        const data = {};
+          const formData = new FormData(this);
+          const data = {};
 
-        formData.forEach((value, key) => {
-          if (data[key]) {
-            if (Array.isArray(data[key])) {
-              data[key].push(value);
+          formData.forEach((value, key) => {
+            if (data[key]) {
+              if (Array.isArray(data[key])) {
+                data[key].push(value);
+              } else {
+                data[key] = [data[key], value];
+              }
             } else {
-              data[key] = [data[key], value];
+              data[key] = value;
             }
-          } else {
-            data[key] = value;
-          }
-        });
-
-        db.collection("onboarding_submissions").add({
-          ...data,
-          timestamp: firebase.firestore.FieldValue.serverTimestamp()
-        })
-          .then(() => {
-            alert("Your onboarding form has been submitted successfully!");
-            onboardingForm.reset();
-          })
-          .catch((error) => {
-            alert("Submission failed: " + error.message);
           });
-      });
-    }
+
+          db.collection("onboarding_submissions").add({
+            ...data,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+          })
+            .then(() => {
+              alert("Your onboarding form has been submitted successfully!");
+              onboardingForm.reset();
+            })
+            .catch((error) => {
+              alert("Submission failed: " + error.message);
+            });
+        });
+      }
+    });
   </script>
 </head>
 
@@ -509,6 +511,7 @@
           <a href="privacy.html">Privacy Policy</a>
           <a href="#">Terms</a>
         </div>
+
         <div class="footer-bottom">
           <p>© 2025 Softwork Solutions. All rights reserved.</p>
           <p style="margin-top: 1rem; font-size: 0.9rem; color: #666;">
