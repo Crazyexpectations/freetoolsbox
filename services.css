@@ -1025,6 +1025,27 @@ body.dark .footer-socials a:hover {
     z-index: 99999;
   }
 
+  .hover-overlay {
+    position: static;
+    top: auto;
+    left: auto;
+    transform: none;
+    background: transparent;
+    color: inherit;
+    padding: 0;
+    box-shadow: none;
+    display: block !important;
+  }
+
+  .hover-overlay .overlay-inner {
+    padding-top: 1rem;
+    border-top: 1px solid rgba(0,0,0,0.1);
+  }
+
+  .service-detail:hover .hover-overlay {
+    left: auto; /* override hover behavior */
+  }
+
 
 
   body.dark .mobile-nav {
