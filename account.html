@@ -70,12 +70,12 @@
   <section class="hero">
     <canvas id="network-bg"></canvas>
     <div class="hero-inner">
-      <h1>Your Dashboard</h1>
-      <p>Welcome back! View your submitted onboarding forms here.</p>
+      <h1>Welcome to Your Dashboard</h1>
+      <p>Manage your profile and view your submissions</p>
     </div>
   </section>
 
-  <!-- USER PROFILE SECTION -->
+  <!-- USER INFO -->
   <section class="container" style="text-align:center; margin-top: 2rem;">
     <p id="loading-msg">Checking login status...</p>
     <img id="user-pic" src="" alt="Profile Picture" style="width: 100px; border-radius: 50%; display:none;" />
@@ -83,20 +83,20 @@
     <p id="user-email"></p>
   </section>
 
-  <!-- FORM SUBMISSIONS -->
+  <!-- FORM TRACKER -->
   <section class="container" style="margin-top: 3rem;">
     <h2>Submitted Forms</h2>
-    <div id="form-submissions" style="margin-top: 1.5rem;">Loading...</div>
+    <div id="form-submissions">Loading your submissions...</div>
   </section>
 
-  <!-- JS to load form submissions -->
+  <!-- LOGOUT + FIREBASE HANDLER -->
   <script>
     firebase.auth().onAuthStateChanged(user => {
       document.getElementById("loading-msg").style.display = "none";
       if (user) {
-        document.getElementById("user-pic").src = user.photoURL || "default.png";
+        document.getElementById("user-pic").src = user.photoURL || 'default.png';
         document.getElementById("user-pic").style.display = "inline-block";
-        document.getElementById("user-name").textContent = user.displayName || "User";
+        document.getElementById("user-name").textContent = user.displayName || 'User';
         document.getElementById("user-email").textContent = user.email;
 
         db.collection("onboarding_submissions")
@@ -105,38 +105,25 @@
           .get()
           .then(snapshot => {
             const container = document.getElementById("form-submissions");
-            if (snapshot.empty) {
-              container.innerHTML = "<p>No submissions found yet.</p>";
-              return;
-            }
-            container.innerHTML = "";
+            container.innerHTML = snapshot.empty ? "<p>No forms found.</p>" : "";
             snapshot.forEach(doc => {
               const data = doc.data();
               const div = document.createElement("div");
-              div.className = "form-card";
-              div.style.cssText = `
-                background:#fff;
-                color:#000;
-                padding:1rem;
-                border-radius:8px;
-                box-shadow:0 2px 8px rgba(0,0,0,0.08);
-                margin-bottom:1.5rem;
-              `;
+              div.style.cssText = "border:1px solid #ccc; border-radius:8px; padding:1rem; margin-bottom:1rem";
               div.innerHTML = `
-                <h3>${data.company_name || 'Unnamed Company'}</h3>
-                <p><strong>Contact Person:</strong> ${data.contact_person || 'N/A'}</p>
+                <p><strong>Company:</strong> ${data.company_name || 'N/A'}</p>
                 <p><strong>Submitted:</strong> ${data.timestamp?.toDate().toLocaleString() || 'Unknown'}</p>
-                <p><strong>Project Type:</strong> ${(data.project_type || []).join(", ") || data.project_type_other || 'N/A'}</p>
               `;
               container.appendChild(div);
             });
           })
           .catch(err => {
-            console.error("Error retrieving submissions:", err);
-            document.getElementById("form-submissions").textContent = "Failed to load submissions.";
+            document.getElementById("form-submissions").textContent = "Error loading forms.";
+            console.error(err);
           });
+
       } else {
-        setTimeout(() => (window.location.href = "join.html"), 1500);
+        setTimeout(() => window.location.href = "join.html", 1000);
       }
     });
 
