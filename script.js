@@ -521,3 +521,14 @@ window.logout = function () {
     alert("Logout failed: " + error.message);
   });
 };
+
+document.getElementById("no-website")?.addEventListener("change", function () {
+  const websiteInput = document.querySelector('input[name="website"]');
+  if (this.checked) {
+    websiteInput.value = "No website";
+    websiteInput.disabled = true;
+  } else {
+    websiteInput.value = "";
+    websiteInput.disabled = false;
+  }
+});
