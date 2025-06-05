@@ -524,6 +524,28 @@ body.dark #theme-toggle {
   padding: 2rem;
 }
 
+.hero-socials {
+  position: absolute;
+  top: 50%;
+  left: 1.5rem;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  z-index: 10;
+}
+
+.hero-socials a {
+  color: #00bcd4;
+  transition: color 0.3s ease;
+}
+
+.hero-socials i {
+  width: 24px;
+  height: 24px;
+  stroke-width: 1.8;
+}
+
 .hero-inner {
   max-width: 800px;
 }
@@ -790,6 +812,14 @@ body.dark .socials a {
   color: #fff;
 }
 
+body.dark .hero-socials a {
+  color: #00e5ff;
+}
+
+body.dark .hero-socials svg.lucide {
+  stroke: #00e5ff;
+}
+
 body.dark .menu-toggle {
   color: #fff;
 }
@@ -881,6 +911,14 @@ body.dark .footer-brand p{
 @media (max-width: 768px) {
   .hero h1 {
     font-size: 2rem;
+  }
+
+  .hero-socials {
+    top: auto;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    flex-direction: row;
   }
 
   .nav-links {
