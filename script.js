@@ -29,14 +29,21 @@ document.addEventListener('DOMContentLoaded', () => {
     ghostX = window.innerWidth / 2; ghostY = window.innerHeight / 2;
   }
 
+  let lastMoveTime = 0;
   document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX; mouseY = e.clientY;
+    const now = performance.now();
+    if (now - lastMoveTime < 16) return; // ~60fps
+    lastMoveTime = now;
+
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+
     if (isIdle) ghost?.classList.remove('sleepy'), isIdle = false;
     clearTimeout(idleTimeout);
     idleTimeout = setTimeout(() => {
       ghost?.classList.add('sleepy'); isIdle = true;
     }, 4000);
-  });
+  }, { passive: true });
 
   function followGhost() {
     ghostX += (mouseX - ghostX) * 0.1;
@@ -47,7 +54,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     requestAnimationFrame(followGhost);
   }
-  followGhost();
+
+  if (window.innerWidth < 768) {
+    if (ghost) ghost.style.display = "none";
+  } else {
+    followGhost();
+  }
 
   setTimeout(() => {
     if (ghost && speechBubble) {
