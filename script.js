@@ -423,16 +423,17 @@ document.addEventListener('DOMContentLoaded', () => {
 // === GSAP SECTION ANIMATIONS ===
 gsap.registerPlugin(ScrollTrigger);
 
+new Typed("#typed-text", {
+  strings: ["Your Digital Vision", "Your Growth", "Your Innovation", "Your Dreams"],
+  typeSpeed: 60,
+  backSpeed: 30,
+  backDelay: 2000,
+  loop: true
+});
+
 // Animate hero on page load
 gsap.from(".hero h1", { opacity: 0, y: -50, duration: 1 });
 gsap.from(".hero p", { opacity: 0, y: 30, delay: 0.3, duration: 1 });
-gsap.from(".cta-buttons a", {
-  opacity: 0,
-  y: 40,
-  delay: 0.6,
-  stagger: 0.2,
-  duration: 1
-});
 
 // Animate each section on scroll
 document.querySelectorAll("section").forEach((section) => {
@@ -450,17 +451,20 @@ document.querySelectorAll("section").forEach((section) => {
 
 // Animate service cards with stagger
 gsap.utils.toArray(".service-card").forEach((card, i) => {
-  gsap.from(card, {
-    scrollTrigger: {
-      trigger: card,
-      start: "top 85%",
-    },
-    opacity: 0,
-    y: 40,
-    duration: 0.8,
-    delay: i * 0.1,
-    ease: "power2.out"
-  });
+  gsap.fromTo(card,
+    { opacity: 0, y: 40 },
+    {
+      scrollTrigger: {
+        trigger: card,
+        start: "top 85%",
+      },
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      delay: i * 0.1,
+      ease: "power2.out"
+    }
+  );
 });
 
 // Animate value cards
@@ -566,3 +570,4 @@ document.getElementById("no-website")?.addEventListener("change", function () {
     websiteInput.disabled = false;
   }
 });
+
