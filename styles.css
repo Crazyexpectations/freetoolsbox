@@ -10,7 +10,7 @@ body {
   overflow-x: hidden;
 }
 
-html{
+html {
   max-width: 100%;
   overflow-x: hidden;
 }
@@ -321,11 +321,11 @@ a {
   transition: transform 0.4s;
 }
 
-#mobile-theme-toggle:checked + .slider {
+#mobile-theme-toggle:checked+.slider {
   background-color: #00bcd4;
 }
 
-#mobile-theme-toggle:checked + .slider::before {
+#mobile-theme-toggle:checked+.slider::before {
   transform: translateX(24px);
 }
 
@@ -443,11 +443,13 @@ a {
   border-radius: 34px;
   transition: background-color 0.4s;
   z-index: 2;
-  margin: 0; /* make sure there's no stretch */
+  margin: 0;
+  /* make sure there's no stretch */
 }
 
 .theme-switch .icon {
-  pointer-events: none; /* prevent icon clicks from affecting toggle */
+  pointer-events: none;
+  /* prevent icon clicks from affecting toggle */
 }
 
 
@@ -463,13 +465,13 @@ a {
   transition: transform 0.4s;
 }
 
-#theme-toggle:checked + .slider::before,
-#mobile-theme-toggle:checked + .slider::before {
+#theme-toggle:checked+.slider::before,
+#mobile-theme-toggle:checked+.slider::before {
   transform: translateX(24px);
 }
 
-#theme-toggle:checked + .slider,
-#mobile-theme-toggle:checked + .slider {
+#theme-toggle:checked+.slider,
+#mobile-theme-toggle:checked+.slider {
   background-color: #00bcd4;
 }
 
@@ -729,6 +731,10 @@ body.dark #theme-toggle {
   margin-bottom: 1rem;
 }
 
+.why-choose-us svg.lucide {
+  stroke: #000;
+}
+
 /* NEW Value Grid Styling */
 .value-grid {
   color: #000;
@@ -882,7 +888,7 @@ body.dark #theme-toggle {
   color: #00bcd4;
 }
 
-.footer-brand p{
+.footer-brand p {
   color: #000;
 }
 
@@ -1017,8 +1023,12 @@ body.dark .footer-socials a:hover {
   color: #00bcd4;
 }
 
-body.dark .footer-brand p{
+body.dark .footer-brand p {
   color: #fff;
+}
+
+body.dark .why-choose-us svg.lucide {
+  stroke: #fff;
 }
 
 
@@ -1120,7 +1130,7 @@ body.dark .footer-brand p{
     z-index: 99999;
   }
 
-  
+
 
 
 
