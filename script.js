@@ -418,6 +418,15 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+// Global logout function
+window.logout = function () {
+  firebase.auth().signOut().then(() => {
+    localStorage.removeItem("softwork_logged_in");
+    window.location.href = "join.html";
+  }).catch(error => {
+    alert("Logout failed: " + error.message);
+  });
+};
 
 
 // === GSAP SECTION ANIMATIONS ===
@@ -547,7 +556,10 @@ const profileIconLink = document.getElementById("profile-icon-link");
 
 if (isLoggedIn) {
   if (loginBtn) loginBtn.style.display = "none";
-  if (profileIconLink) profileIconLink.style.display = "inline-flex";
+  if (profileIconLink) profileIconLink.style.display = "inline-block";
+} else {
+  if (loginBtn) loginBtn.style.display = "inline-block";
+  if (profileIconLink) profileIconLink.style.display = "none";
 }
 
 // Global logout function
