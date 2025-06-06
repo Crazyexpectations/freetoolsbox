@@ -29,6 +29,24 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
   </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const isLoggedIn = localStorage.getItem("softwork_logged_in") === "true";
+      const guestMsg = document.querySelector(".guest-message");
+      const loggedMsg = document.querySelector(".logged-message");
+      const form = document.querySelector(".onboarding-form");
+
+      if (isLoggedIn) {
+        if (guestMsg) guestMsg.style.display = "none";
+        if (loggedMsg) loggedMsg.style.display = "block";
+        if (form) form.style.display = "block";
+      } else {
+        if (guestMsg) guestMsg.style.display = "block";
+        if (loggedMsg) loggedMsg.style.display = "none";
+        if (form) form.style.display = "none";
+      }
+    });
+  </script>
 
 </head>
 
