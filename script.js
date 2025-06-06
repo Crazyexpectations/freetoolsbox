@@ -541,14 +541,17 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-const isLoggedIn = localStorage.getItem("softwork_logged_in") === "true";
-const loginBtn = document.getElementById("login-button");
-const profileIconLink = document.getElementById("profile-icon-link");
+document.addEventListener("DOMContentLoaded", () => {
+  const isLoggedIn = localStorage.getItem("softwork_logged_in") === "true";
+  const loginBtn = document.getElementById("login-button");
+  const profileIconLink = document.getElementById("profile-icon-link");
 
-if (isLoggedIn) {
-  if (loginBtn) loginBtn.style.display = "none";
-  if (profileIconLink) profileIconLink.style.display = "inline-flex";
-}
+  if (isLoggedIn) {
+    if (loginBtn) loginBtn.style.display = "none";
+    if (profileIconLink) profileIconLink.style.display = "inline-flex";
+  }
+});
+
 
 // Global logout function
 window.logout = function () {
