@@ -432,13 +432,16 @@ window.logout = function () {
 // === GSAP SECTION ANIMATIONS ===
 gsap.registerPlugin(ScrollTrigger);
 
-new Typed("#typed-text", {
-  strings: ["Your Digital Vision", "Your Growth", "Your Innovation", "Your Dreams"],
-  typeSpeed: 60,
-  backSpeed: 30,
-  backDelay: 2000,
-  loop: true
-});
+if (typeof Typed !== "undefined") {
+  new Typed("#typed-text", {
+    strings: ["Your Digital Vision", "Your Growth", "Your Innovation", "Your Dreams"],
+    typeSpeed: 60,
+    backSpeed: 30,
+    backDelay: 2000,
+    loop: true
+  });
+}
+
 
 // Animate hero on page load
 gsap.from(".hero h1", { opacity: 0, y: -50, duration: 1 });
