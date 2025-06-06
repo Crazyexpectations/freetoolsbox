@@ -1,6 +1,4 @@
 body {
-  opacity: 0;
-  animation: fadeIn 0.6s ease-in-out forwards;
   position: relative;
   max-width: 100%;
   /* overflow: hidden; */
