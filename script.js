@@ -1,5 +1,18 @@
 
 document.addEventListener('DOMContentLoaded', () => {
+  // === Login/Profile Toggle ===
+  const isLoggedIn = localStorage.getItem("softwork_logged_in") === "true";
+  const loginBtn = document.getElementById("login-button");
+  const profileIconLink = document.getElementById("profile-icon-link");
+
+  if (isLoggedIn) {
+    if (loginBtn) loginBtn.style.display = "none";
+    if (profileIconLink) profileIconLink.style.display = "inline-block";
+  } else {
+    if (loginBtn) loginBtn.style.display = "inline-block";
+    if (profileIconLink) profileIconLink.style.display = "none";
+  }
+
   const ghost = document.querySelector('.cursor-ghost');
   const speechBubble = ghost?.querySelector('.speech-bubble');
   const messages = [
@@ -111,7 +124,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // === Mobile Menu Toggle ===
-  const isLoggedIn = localStorage.getItem("softwork_logged_in") === "true";
 
   const menuToggle = document.getElementById('menu-toggle');
 
@@ -432,16 +444,13 @@ window.logout = function () {
 // === GSAP SECTION ANIMATIONS ===
 gsap.registerPlugin(ScrollTrigger);
 
-if (typeof Typed !== "undefined") {
-  new Typed("#typed-text", {
-    strings: ["Your Digital Vision", "Your Growth", "Your Innovation", "Your Dreams"],
-    typeSpeed: 60,
-    backSpeed: 30,
-    backDelay: 2000,
-    loop: true
-  });
-}
-
+new Typed("#typed-text", {
+  strings: ["Your Digital Vision", "Your Growth", "Your Innovation", "Your Dreams"],
+  typeSpeed: 60,
+  backSpeed: 30,
+  backDelay: 2000,
+  loop: true
+});
 
 // Animate hero on page load
 gsap.from(".hero h1", { opacity: 0, y: -50, duration: 1 });
@@ -552,18 +561,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-
-const isLoggedIn = localStorage.getItem("softwork_logged_in") === "true";
-const loginBtn = document.getElementById("login-button");
-const profileIconLink = document.getElementById("profile-icon-link");
-
-if (isLoggedIn) {
-  if (loginBtn) loginBtn.style.display = "none";
-  if (profileIconLink) profileIconLink.style.display = "inline-block";
-} else {
-  if (loginBtn) loginBtn.style.display = "inline-block";
-  if (profileIconLink) profileIconLink.style.display = "none";
-}
 
 // Global logout function
 window.logout = function () {
