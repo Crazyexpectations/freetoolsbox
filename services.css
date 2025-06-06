@@ -1,5 +1,7 @@
 /* Global Setup */
 body {
+  opacity: 0;
+  animation: fadeIn 0.6s ease-in-out forwards;
   position: relative;
   /* overflow: hidden; */
   margin: 0;
