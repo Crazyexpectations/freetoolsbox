@@ -221,52 +221,73 @@
     </div>
   </section>
 
-  <section class="testimonials-grid pre-fade">
+  <section class="testimonials-section pre-fade">
     <div class="container">
-      <h2>What Our Clients Say</h2>
+      <h2 class="testimonials-heading">What Our Clients Say</h2>
       <div class="testimonial-grid">
         <div class="testimonial-card">
-          <img src="imp1.jpg" alt="Shreak.P Rebel" />
-          <div class="testimonial-content">
-            <h4>Shreak.P Rebel</h4>
-            <p class="role">VP Tech, Rebel Group</p>
-            <p class="quote">“Softwork isn’t just a vendor — they’re our innovation partner.”</p>
+          <img src="imp1.jpg" alt="Shreak.P Rebel" class="testimonial-img" />
+          <div class="testimonial-body">
+            <p class="testimonial-quote">“Softwork isn’t just a vendor — they’re our innovation partner.”</p>
+            <div class="testimonial-info">
+              <h4>Shreak.P Rebel</h4>
+              <p class="role">VP Tech, Rebel Group</p>
+            </div>
           </div>
         </div>
 
         <div class="testimonial-card">
-          <img src="imp2.jpg" alt="Sudakar Vali" />
-          <div class="testimonial-content">
-            <h4>Sudakar Vali</h4>
-            <p class="role">Director, Vali Systems</p>
-            <p class="quote">“They overdelivered on every milestone. Flawless execution.”</p>
+          <img src="imp2.jpg" alt="Sudakar Vali" class="testimonial-img" />
+          <div class="testimonial-body">
+            <p class="testimonial-quote">“They overdelivered on every milestone. Flawless execution.”</p>
+            <div class="testimonial-info">
+              <h4>Sudakar Vali</h4>
+              <p class="role">Director, Vali Systems</p>
+            </div>
           </div>
         </div>
 
         <div class="testimonial-card">
-          <img src="imp3.jpg" alt="Steve Johnson" />
-          <div class="testimonial-content">
-            <h4>Steve Johnson</h4>
-            <p class="role">Founder, Ascend Tech</p>
-            <p class="quote">“We scaled 3× in 6 months. Their solutions paid for themselves fast.”</p>
+          <img src="imp3.jpg" alt="Steve Johnson" class="testimonial-img" />
+          <div class="testimonial-body">
+            <p class="testimonial-quote">“We scaled 3× in 6 months. Their solutions paid for themselves fast.”</p>
+            <div class="testimonial-info">
+              <h4>Steve Johnson</h4>
+              <p class="role">Founder, Ascend Tech</p>
+            </div>
           </div>
         </div>
 
         <div class="testimonial-card">
-          <img src="alica.jpg" alt="Alicia Tran" />
-          <div class="testimonial-content">
-            <h4>Alicia Tran</h4>
-            <p class="role">CMO, NovaX</p>
-            <p class="quote">“Brilliant team, smart strategies, and a joy to collaborate with.”</p>
+          <img src="imp4.jpg" alt="Alicia Tran" class="testimonial-img" />
+          <div class="testimonial-body">
+            <p class="testimonial-quote">“Brilliant team, smart strategies, and a joy to collaborate with.”</p>
+            <div class="testimonial-info">
+              <h4>Alicia Tran</h4>
+              <p class="role">CMO, NovaX</p>
+            </div>
           </div>
         </div>
 
         <div class="testimonial-card">
-          <img src="rahul.jpg" alt="Rahul Dev" />
-          <div class="testimonial-content">
-            <h4>Rahul Dev</h4>
-            <p class="role">Product Head, Brightwave</p>
-            <p class="quote">“Their team became part of ours. Seamless, proactive, and talented.”</p>
+          <img src="rahul.jpg" alt="Rahul Dev" class="testimonial-img" />
+          <div class="testimonial-body">
+            <p class="testimonial-quote">“Their team became part of ours. Seamless, proactive, and talented.”</p>
+            <div class="testimonial-info">
+              <h4>Rahul Dev</h4>
+              <p class="role">Product Head, Brightwave</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <img src="alica.jpg" alt="Alicia Tran" class="testimonial-img" />
+          <div class="testimonial-body">
+            <p class="testimonial-quote">“One of the best team i would ever recommand”</p>
+            <div class="testimonial-info">
+              <h4>John Kham</h4>
+              <p class="role">SE, SpaceX</p>
+            </div>
           </div>
         </div>
       </div>
@@ -283,40 +304,62 @@
 
   <footer class="footer">
     <div class="container">
-      <div class="footer-grid">
-        <!-- Brand Info -->
-        <div class="footer-brand">
-          <img src="logo.png" alt="Softwork">
-          <p>Softwork Solutions<br>Powering Digital Vision</p>
+      <div class="footer-columns">
+        <!-- Logo and Tagline -->
+        <div class="footer-left">
+          <img id="footer-logo" src="logo.png" alt="Softwork Solutions Logo">
+          <p>Softwork Solutions – powering your digital vision with innovative software solutions.</p>
         </div>
 
         <!-- Quick Links -->
-        <div class="footer-links">
+        <div class="footer-center">
           <h4>Quick Links</h4>
-          <a href="index.html">Home</a>
-          <a href="services.html">Services</a>
-          <a href="about.html">About</a>
-          <a href="contact.html">Contact</a>
+          <ul class="footer-nav">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
         </div>
 
-        <!-- Socials / Legal -->
-        <div class="footer-socials">
-          <h4>Connect</h4>
-          <a href="#">LinkedIn</a>
-          <a href="#">Twitter</a>
-          <a href="privacy.html">Privacy Policy</a>
-          <a href="#">Terms</a>
+        <!-- Quick Support (with icons) -->
+        <div class="footer-support">
+          <h4>Quick Support</h4>
+          <ul class="footer-nav">
+            <li><a href="privacy.html"><i data-lucide="file-lock"></i> Privacy Policy</a></li>
+            <li><a href="#"><i data-lucide="file-text"></i> Terms &amp; Conditions</a></li>
+            <li><a href="#"><i data-lucide="life-buoy"></i> Contact Support</a></li>
+          </ul>
         </div>
-        <div class="footer-bottom">
-          <p style="margin-top: 1rem; font-size: 0.9rem; color: #666;">
-            This form is used to collect onboarding information for services provided by Softwork Solutions. We do not
-            collect passwords, credit card data, or install software. Data is securely stored in Firebase and only used
-            internally.
-          </p>
+
+        <!-- Consolidated Contact Info -->
+        <div class="footer-right">
+          <h4>Contact Us</h4>
+          <address>
+            <div class="contact-item">
+              <i data-lucide="map-pin"></i>
+              <span> 123 Softwork Avenue, Tech City</span>
+            </div>
+            <div class="contact-item">
+              <i data-lucide="phone"></i>
+              <span> +1 (800) 123-4567</span>
+            </div>
+            <div class="contact-item">
+              <i data-lucide="mail"></i>
+              <span> info@softwork.com</span>
+            </div>
+          </address>
         </div>
       </div>
 
+      <!-- Footer bottom: social icons and copyright -->
+      <hr>
       <div class="footer-bottom">
+        <div class="social-icons">
+          <a href="#"><i data-lucide="linkedin"></i></a>
+          <a href="#"><i data-lucide="twitter"></i></a>
+          <a href="#"><i data-lucide="facebook"></i></a>
+        </div>
         <p>© 2025 Softwork Solutions. All rights reserved.</p>
       </div>
     </div>
