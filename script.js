@@ -391,7 +391,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // === DARK MODE TOGGLE ===
   const themeToggle = document.getElementById('theme-toggle');
   const logoImg = document.getElementById('logo-img');
-  const footerLogo = document.querySelector('.footer-brand img');
+  const footerLogo = document.getElementById('footer-logo');
 
   function applyTheme(isDark) {
     document.body.classList.toggle('dark', isDark);
