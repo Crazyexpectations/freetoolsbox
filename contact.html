@@ -176,44 +176,64 @@
       allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
   </section>
 
-  <!-- 🦶 FOOTER -->
   <footer class="footer">
     <div class="container">
-      <div class="footer-grid">
-        <!-- Brand Info -->
-        <div class="footer-brand">
-          <img src="logo.png" alt="Softwork">
-          <p>Softwork Solutions<br>Powering Digital Vision</p>
+      <div class="footer-columns">
+        <!-- Logo and Tagline -->
+        <div class="footer-left">
+          <img id="footer-logo" src="logo.png" alt="Softwork Solutions Logo">
+          <p>Softwork Solutions – powering your digital vision with innovative software solutions.</p>
         </div>
 
         <!-- Quick Links -->
-        <div class="footer-links">
+        <div class="footer-center">
           <h4>Quick Links</h4>
-          <a href="index.html">Home</a>
-          <a href="services.html">Services</a>
-          <a href="about.html">About</a>
-          <a href="contact.html">Contact</a>
+          <ul class="footer-nav">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
         </div>
 
-        <!-- Socials / Legal -->
-        <div class="footer-socials">
-          <h4>Connect</h4>
-          <a href="#">LinkedIn</a>
-          <a href="#">Twitter</a>
-          <a href="privacy.html">Privacy Policy</a>
-          <a href="#">Terms</a>
+        <!-- Quick Support (with icons) -->
+        <div class="footer-support">
+          <h4>Quick Support</h4>
+          <ul class="footer-nav">
+            <li><a href="privacy.html"><i data-lucide="file-lock"></i> Privacy Policy</a></li>
+            <li><a href="#"><i data-lucide="file-text"></i> Terms &amp; Conditions</a></li>
+            <li><a href="#"><i data-lucide="life-buoy"></i> Contact Support</a></li>
+          </ul>
         </div>
 
-        <div class="footer-bottom">
-          <p style="margin-top: 1rem; font-size: 0.9rem; color: #666;">
-            This form is used to collect onboarding information for services provided by Softwork Solutions. We do not
-            collect passwords, credit card data, or install software. Data is securely stored in Firebase and only used
-            internally.
-          </p>
+        <!-- Consolidated Contact Info -->
+        <div class="footer-right">
+          <h4>Contact Us</h4>
+          <address>
+            <div class="contact-item">
+              <i data-lucide="map-pin"></i>
+              <span> 123 Softwork Avenue, Tech City</span>
+            </div>
+            <div class="contact-item">
+              <i data-lucide="phone"></i>
+              <span> +1 (800) 123-4567</span>
+            </div>
+            <div class="contact-item">
+              <i data-lucide="mail"></i>
+              <span> info@softwork.com</span>
+            </div>
+          </address>
         </div>
       </div>
 
+      <!-- Footer bottom: social icons and copyright -->
+      <hr>
       <div class="footer-bottom">
+        <div class="social-icons">
+          <a href="#"><i data-lucide="linkedin"></i></a>
+          <a href="#"><i data-lucide="twitter"></i></a>
+          <a href="#"><i data-lucide="facebook"></i></a>
+        </div>
         <p>© 2025 Softwork Solutions. All rights reserved.</p>
       </div>
     </div>
