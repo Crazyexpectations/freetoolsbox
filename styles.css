@@ -512,6 +512,14 @@ a {
   gap: 2rem;
 }
 
+.nav-links a.active {
+  color: #00bcd4;
+}
+
+.nav-links a.active::after {
+  width: 100%;
+}
+
 .nav-links a {
   position: relative;
   color: rgb(0, 0, 0);
@@ -1271,6 +1279,11 @@ body.dark .why-choose-us svg.lucide {
     color: inherit;
     z-index: 99999;
     cursor: pointer;
+  }
+
+  #login-button,
+  #profile-icon-link {
+    display: none !important;
   }
 
   .mobile-nav .theme-switch {
