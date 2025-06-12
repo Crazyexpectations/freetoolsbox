@@ -1212,7 +1212,15 @@ body.dark .footer-bottom p {
 
   /* Allow profile icon inside mobile menu */
   .mobile-nav #profile-icon-link {
-    display: inline-flex !important;
+    display: block !important;
+    text-align: center;
+    width: 100%;
+    max-width: 300px;
+    margin: 1rem auto 2rem auto;
+    font-weight: 600;
+    border-radius: 8px;
+    background-color: #00bcd4;
+    color: black;
   }
 
   .mobile-nav .theme-switch {
