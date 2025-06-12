@@ -1297,9 +1297,13 @@ body.dark .why-choose-us svg.lucide {
     cursor: pointer;
   }
 
-  #login-button,
-  #profile-icon-link {
+    #login-button {
     display: none !important;
+  }
+
+  /* Allow profile icon inside mobile menu */
+  .mobile-nav #profile-icon-link {
+    display: inline-flex !important;
   }
 
   .mobile-nav .theme-switch {
