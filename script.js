@@ -275,7 +275,11 @@ document.addEventListener('DOMContentLoaded', () => {
   <a href="services.html">Services</a>
   <a href="about.html">About</a>
   <a href="contact.html">Contact</a>
-  ${isLoggedIn ? `<a href="#" class="btn login-btn" id="mobile-logout">Logout</a>` : `<a href="join.html" class="btn login-btn">Login</a>`}
+  ${
+    isLoggedIn
+      ? `<a id="profile-icon-link" href="account.html"><i class="fas fa-user-circle"></i> Account</a>`
+      : `<a id="login-button" class="btn login-btn">Log In</a>`
+  }
 `;
 
   document.body.appendChild(mobileNav);
