@@ -82,69 +82,127 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }, 400);
 
-  // === Liquid inside ghost animation ===
+  // === Liquid inside ghost animation (realistic physics with directional inertia) ===
   const liquidCanvas = document.getElementById("ghost-liquid");
-  const ctx = liquidCanvas.getContext("2d");
+  if (liquidCanvas) {
+    const ctx = liquidCanvas.getContext("2d");
 
-  let width = liquidCanvas.width = liquidCanvas.offsetWidth;
-  let height = liquidCanvas.height = liquidCanvas.offsetHeight;
+    let width = liquidCanvas.width = liquidCanvas.offsetWidth;
+    let height = liquidCanvas.height = liquidCanvas.offsetHeight;
 
-  let lastGX = ghostX;
-  let lastGY = ghostY;
-  let velocity = 0;
-  let amplitude = 0;
-  let waveOffset = 0;
-  const damping = 0.95;
-  const maxAmp = 15;
-  const baseY = height * 0.68;
+    let lastGX = ghostX;
+    let lastGY = ghostY;
+    let inertiaX = 0;
+    let inertiaY = 0;
+    let waveOffset = 0;
 
-  function drawLiquid() {
-    ctx.clearRect(0, 0, width, height);
+    const damping = 0.96; // realistic inertia decay
+    const maxAmp = 18;
+    const baseY = height * 0.78; // below necklace
 
-    ctx.beginPath();
-    ctx.moveTo(0, height);
+    let splashParticles = [];
 
-    for (let x = 0; x <= width; x++) {
-      const waveY = Math.sin((x + waveOffset) * 0.05) * amplitude + baseY;
-      ctx.lineTo(x, waveY);
+    function spawnSplash(x, y, dx, dy) {
+      for (let i = 0; i < 5; i++) {
+        splashParticles.push({
+          x: x + Math.random() * 10 - 5,
+          y: y + Math.random() * 10 - 5,
+          vx: dx * (0.3 + Math.random() * 0.4),
+          vy: dy * (0.3 + Math.random() * 0.4) - 1,
+          radius: 1 + Math.random() * 1.5,
+          alpha: 1
+        });
+      }
     }
 
-    ctx.lineTo(width, height);
-    ctx.closePath();
+    function drawSplash() {
+      for (let i = 0; i < splashParticles.length; i++) {
+        let p = splashParticles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += 0.08;
+        p.alpha -= 0.015;
 
-    const gradient = ctx.createLinearGradient(0, baseY - 30, 0, height);
-    gradient.addColorStop(0, "rgba(0,229,255,0.4)");
-    gradient.addColorStop(1, "rgba(0,188,212,0.8)");
-    ctx.fillStyle = gradient;
-    ctx.fill();
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(0,229,255,${p.alpha})`;
+        ctx.fill();
+      }
+      splashParticles = splashParticles.filter(p => p.alpha > 0);
+    }
+
+    let bubbles = Array.from({ length: 10 }, () => ({
+      x: Math.random() * width,
+      y: baseY + Math.random() * (height - baseY),
+      r: 1 + Math.random() * 2,
+      speed: 0.2 + Math.random() * 0.4
+    }));
+
+    function drawBubbles() {
+      bubbles.forEach(b => {
+        b.y -= b.speed;
+        if (b.y < baseY) b.y = height;
+
+        ctx.beginPath();
+        ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(0,255,255,0.3)";
+        ctx.fill();
+      });
+    }
+
+    function drawLiquid() {
+      ctx.clearRect(0, 0, width, height);
+
+      ctx.beginPath();
+      ctx.moveTo(0, height);
+      for (let x = 0; x <= width; x++) {
+        const directionalOffset = Math.sin((x + waveOffset) * 0.02 + inertiaX * 0.05);
+        const waveY = directionalOffset * Math.abs(inertiaY) + baseY;
+        ctx.lineTo(x, waveY);
+      }
+      ctx.lineTo(width, height);
+      ctx.closePath();
+
+      const gradient = ctx.createLinearGradient(0, baseY - 40, 0, height);
+      gradient.addColorStop(0, "rgba(0,229,255,0.4)");
+      gradient.addColorStop(1, "rgba(0,188,212,0.9)");
+      ctx.fillStyle = gradient;
+      ctx.fill();
+
+      drawBubbles();
+      drawSplash();
+    }
+
+    function animateLiquid() {
+      const dx = ghostX - lastGX;
+      const dy = ghostY - lastGY;
+
+      inertiaX += dx * 0.4;
+      inertiaY += dy * 0.3;
+
+      inertiaX *= damping;
+      inertiaY *= damping;
+
+      if (Math.sqrt(dx * dx + dy * dy) > 2.5) {
+        spawnSplash(width / 2, baseY, dx, dy);
+      }
+
+      waveOffset += 0.15;
+      drawLiquid();
+
+      lastGX = ghostX;
+      lastGY = ghostY;
+
+      requestAnimationFrame(animateLiquid);
+    }
+
+    animateLiquid();
+
+    window.addEventListener("resize", () => {
+      width = liquidCanvas.width = liquidCanvas.offsetWidth;
+      height = liquidCanvas.height = liquidCanvas.offsetHeight;
+    });
   }
-
-  function animateLiquid() {
-    const dx = ghostX - lastGX;
-    const dy = ghostY - lastGY;
-    const speed = Math.sqrt(dx * dx + dy * dy);
-
-    // Increase amplitude with speed, but let it persist
-    velocity = speed;
-    amplitude += velocity * 0.5;
-    amplitude *= damping;
-
-    waveOffset += 2;
-    drawLiquid();
-
-    lastGX = ghostX;
-    lastGY = ghostY;
-
-    requestAnimationFrame(animateLiquid);
-  }
-
-  animateLiquid();
-
-  window.addEventListener("resize", () => {
-    width = liquidCanvas.width = liquidCanvas.offsetWidth;
-    height = liquidCanvas.height = liquidCanvas.offsetHeight;
-  });
-
   //finsihed
 
   document.addEventListener('click', () => {
