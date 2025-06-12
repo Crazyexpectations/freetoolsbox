@@ -65,7 +65,8 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 0; /* BELOW face/hands */
+  z-index: 0;
+  /* BELOW face/hands */
   pointer-events: none;
 }
 
@@ -927,7 +928,8 @@ body.dark #theme-toggle {
 .footer-nav a i,
 .footer-contact i,
 .footer-social a i {
-  margin-right: 0.5rem;  /* adjust to taste */
+  margin-right: 0.5rem;
+  /* adjust to taste */
   /* optionally align icons and text vertically */
   vertical-align: middle;
 }
@@ -939,7 +941,7 @@ body.dark {
 }
 
 /* Navbar & Footer background */
-body.dark .navbar{
+body.dark .navbar {
   background-color: #000;
   color: #fff;
 }
@@ -1051,7 +1053,8 @@ body.dark .onboarding-form button:hover {
 
 @media (max-width: 768px) {
   .onboarding-form {
-    padding: 0; /* ensure no side padding pushing it */
+    padding: 0;
+    /* ensure no side padding pushing it */
     width: 100%;
     max-width: 100%;
   }
@@ -1203,9 +1206,13 @@ body.dark .footer-bottom p {
     cursor: pointer;
   }
 
-  #login-button,
-  #profile-icon-link {
+  #login-button {
     display: none !important;
+  }
+
+  /* Allow profile icon inside mobile menu */
+  .mobile-nav #profile-icon-link {
+    display: inline-flex !important;
   }
 
   .mobile-nav .theme-switch {
@@ -1274,6 +1281,14 @@ body.dark .footer-bottom p {
 
   body.dark .menu-toggle {
     color: #fff;
+  }
+
+  .mobile-nav .mobile-auth-btn {
+    display: block;
+    text-align: center;
+    width: 100%;
+    max-width: 300px;
+    margin: 1rem auto;
   }
 
 }
