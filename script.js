@@ -258,32 +258,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // === Mobile Menu Toggle ===
 
-  const menuToggle = document.getElementById('menu-toggle');
+  document.addEventListener('DOMContentLoaded', () => {
+    const menuToggle = document.getElementById('menu-toggle');
 
-  const mobileNav = document.createElement('div');
-  mobileNav.classList.add('mobile-nav');
+    const mobileNav = document.createElement('div');
+    mobileNav.classList.add('mobile-nav');
 
-  mobileNav.innerHTML = `
-  <button class="close-btn" aria-label="Close"><i data-lucide="x"></i></button>
-  <label class="theme-switch">
-    <span class="icon light"><i data-lucide="sun"></i></span>
-    <input type="checkbox" id="mobile-theme-toggle">
-    <span class="slider"></span>
-    <span class="icon dark"><i data-lucide="moon"></i></span>
-  </label>
-  <a href="index.html">Home</a>
-  <a href="services.html">Services</a>
-  <a href="about.html">About</a>
-  <a href="contact.html">Contact</a>
-  ${
-    isLoggedIn
-      ? `<a id="profile-icon-link" href="account.html"><i class="fas fa-user-circle"></i> Account</a>`
-      : `<a id="login-button" class="btn login-btn">Log In</a>`
-  }
-`;
+    // ✅ Define logic safely here
+    const currentPage = window.location.pathname.split('/').pop();
+    const isAccountPage = currentPage === 'account.html';
+    const isLoggedIn = localStorage.getItem("softwork_logged_in") === "true";
 
-  document.body.appendChild(mobileNav);
-  lucide.createIcons();
+    // ✅ Then set the innerHTML
+    mobileNav.innerHTML = `
+    <button class="close-btn" aria-label="Close"><i data-lucide="x"></i></button>
+    <label class="theme-switch">
+      <span class="icon light"><i data-lucide="sun"></i></span>
+      <input type="checkbox" id="mobile-theme-toggle">
+      <span class="slider"></span>
+      <span class="icon dark"><i data-lucide="moon"></i></span>
+    </label>
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    ${isLoggedIn
+        ? isAccountPage
+          ? `<a id="logout-button" class="btn logout-btn">Log Out</a>`
+          : `<a id="profile-icon-link" href="account.html"><i class="fas fa-user-circle"></i> Account</a>`
+        : `<a id="login-button" class="btn login-btn">Log In</a>`
+      }
+  `;
+
+    // ✅ Append it somewhere if you're dynamically injecting it
+    document.body.appendChild(mobileNav);
+    lucide.createIcons();
+  });
 
   // Attach logout handler after element is added
   if (isLoggedIn) {
