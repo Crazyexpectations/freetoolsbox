@@ -281,9 +281,9 @@ document.addEventListener('DOMContentLoaded', () => {
   <a href="contact.html">Contact</a>
   ${isLoggedIn
       ? isAccountPage
-        ? `<a id="logout-button" class="btn logout-btn">Log Out</a>`
-        : `<a id="profile-icon-link" href="account.html"><i class="fas fa-user-circle"></i> Account</a>`
-      : `<a id="login-button" class="btn login-btn">Log In</a>`
+        ? `<a id="logout-button" class="btn login-btn" style="text-align: center; display: block; width: 100%; max-width: 300px; margin: 1rem auto;">Log Out</a>`
+        : `<a id="profile-icon-link" href="account.html" class="btn login-btn" style="text-align: center; display: block; width: 100%; max-width: 300px; margin: 1rem auto;">Account</a>`
+      : `<a id="login-button" class="btn login-btn" style="text-align: center; display: block; width: 100%; max-width: 300px; margin: 1rem auto;">Log In</a>`
     }
 `;
   document.body.appendChild(mobileNav);
