@@ -131,25 +131,6 @@ document.addEventListener('DOMContentLoaded', () => {
       splashParticles = splashParticles.filter(p => p.alpha > 0);
     }
 
-    let bubbles = Array.from({ length: 10 }, () => ({
-      x: Math.random() * width,
-      y: baseY + Math.random() * (height - baseY),
-      r: 1 + Math.random() * 2,
-      speed: 0.2 + Math.random() * 0.4
-    }));
-
-    function drawBubbles() {
-      bubbles.forEach(b => {
-        b.y -= b.speed;
-        if (b.y < baseY) b.y = height;
-
-        ctx.beginPath();
-        ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(0,255,255,0.3)";
-        ctx.fill();
-      });
-    }
-
     function drawLiquid() {
       ctx.clearRect(0, 0, width, height);
 
@@ -169,7 +150,6 @@ document.addEventListener('DOMContentLoaded', () => {
       ctx.fillStyle = gradient;
       ctx.fill();
 
-      drawBubbles();
       drawSplash();
     }
 
