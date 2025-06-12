@@ -82,6 +82,71 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }, 400);
 
+  // === Liquid inside ghost animation ===
+  const liquidCanvas = document.getElementById("ghost-liquid");
+  const ctx = liquidCanvas.getContext("2d");
+
+  let width = liquidCanvas.width = liquidCanvas.offsetWidth;
+  let height = liquidCanvas.height = liquidCanvas.offsetHeight;
+
+  let lastGX = ghostX;
+  let lastGY = ghostY;
+  let velocity = 0;
+  let amplitude = 0;
+  let waveOffset = 0;
+  const damping = 0.95;
+  const maxAmp = 15;
+  const baseY = height * 0.68;
+
+  function drawLiquid() {
+    ctx.clearRect(0, 0, width, height);
+
+    ctx.beginPath();
+    ctx.moveTo(0, height);
+
+    for (let x = 0; x <= width; x++) {
+      const waveY = Math.sin((x + waveOffset) * 0.05) * amplitude + baseY;
+      ctx.lineTo(x, waveY);
+    }
+
+    ctx.lineTo(width, height);
+    ctx.closePath();
+
+    const gradient = ctx.createLinearGradient(0, baseY - 30, 0, height);
+    gradient.addColorStop(0, "rgba(0,229,255,0.4)");
+    gradient.addColorStop(1, "rgba(0,188,212,0.8)");
+    ctx.fillStyle = gradient;
+    ctx.fill();
+  }
+
+  function animateLiquid() {
+    const dx = ghostX - lastGX;
+    const dy = ghostY - lastGY;
+    const speed = Math.sqrt(dx * dx + dy * dy);
+
+    // Increase amplitude with speed, but let it persist
+    velocity = speed;
+    amplitude += velocity * 0.5;
+    amplitude *= damping;
+
+    waveOffset += 2;
+    drawLiquid();
+
+    lastGX = ghostX;
+    lastGY = ghostY;
+
+    requestAnimationFrame(animateLiquid);
+  }
+
+  animateLiquid();
+
+  window.addEventListener("resize", () => {
+    width = liquidCanvas.width = liquidCanvas.offsetWidth;
+    height = liquidCanvas.height = liquidCanvas.offsetHeight;
+  });
+
+  //finsihed
+
   document.addEventListener('click', () => {
     ghost?.classList.add('surprised');
     setTimeout(() => ghost?.classList.remove('surprised'), 600);
@@ -101,6 +166,16 @@ document.addEventListener('DOMContentLoaded', () => {
       };
       localStorage.setItem('ghostSpawn', JSON.stringify(spawn));
     });
+  });
+
+  // === Highlight Active Nav Link ===
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    const current = window.location.pathname.split("/").pop();
+    if (link.getAttribute("href") === current || current === "" && link.getAttribute("href") === "index.html") {
+      link.classList.add("active");
+    } else {
+      link.classList.remove("active");
+    }
   });
 
   function setRandomMessage() {
