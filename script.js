@@ -262,7 +262,7 @@ document.addEventListener('DOMContentLoaded', () => {
   ${isLoggedIn
       ? isAccountPage
         ? `<a id="mobile-logout" class="btn login-btn mobile-auth-btn">Log Out</a>`
-        : `<a id="profile-icon-link" href="account.html" class="btn login-btn mobile-auth-btn">Account</a>`
+        : `<a id="profile-icon-link" href="account.html" class="btn login-btn mobile-auth-btn" style="text-align: center; display: block; width: 100%; max-width: 300px; margin: 1rem auto;">Account</a>`
       : `<a id="login-button" class="btn login-btn mobile-auth-btn">Log In</a>`
     }
 `;
